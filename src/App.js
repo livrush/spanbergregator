@@ -49,25 +49,28 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav className="navbar navbar-dark bg-primary mb-4">
+        <nav className="navbar navbar-dark bg-primary mb-4 d-flex">
           <a href="#" className="navbar-brand">
             <span className="d-none d-sm-block" >Spanbergregator</span>
             <span className="d-sm-none" ><i class="fas fa-star"></i></span>
           </a>
-          <div className="form-inline my-2 my-lg-0">
+          <form className="input-group w-auto" onSubmit={ target => target.preventDefault() } >
             <input
               name="query"
-              className="form-control mr-sm-2"
+              className="form-control"
               placeholder="Free Search"
               onChange={ this.updateQuery }
             />
-            <button
-              className="btn btn-outline-default my-2 my-sm-0"
-              onClick={() => this.updateSearch(this.state.query)}
-            >
-              Search
-            </button>
-          </div>
+            <div className="input-group-append">
+              <button
+                className="btn btn-outline-light"
+                onClick={() => this.updateSearch(this.state.query)}
+                type="submit"
+              >
+                Search
+              </button>
+            </div>
+          </form>
         </nav>
 
         <div className="container" >
@@ -95,6 +98,11 @@ class App extends Component {
             </ul>
           </div>
         </div>
+        <footer>
+          <p>
+            Made with NewsApi
+          </p>
+        </footer>
       </div>
     );
   }

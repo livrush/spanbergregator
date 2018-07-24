@@ -50,19 +50,24 @@ class App extends Component {
     return (
       <div className="App">
         <nav className="navbar navbar-dark bg-primary mb-4">
-          <a href="#" className="navbar-brand">Spanbergregator</a>
-          <input 
-            name="query" 
-            className="form-control" 
-            placeholder="Free Search" 
-            onChange={ this.updateQuery }
-          />
-          <button
-            className="btn btn-default"
-            onClick={() => this.updateSearch(this.state.query)}
-          >
-            Search
-          </button>
+          <a href="#" className="navbar-brand">
+            <span className="d-none d-sm-block" >Spanbergregator</span>
+            <span className="d-sm-none" ><i class="fas fa-star"></i></span>
+          </a>
+          <div className="form-inline my-2 my-lg-0">
+            <input
+              name="query"
+              className="form-control mr-sm-2"
+              placeholder="Free Search"
+              onChange={ this.updateQuery }
+            />
+            <button
+              className="btn btn-outline-default my-2 my-sm-0"
+              onClick={() => this.updateSearch(this.state.query)}
+            >
+              Search
+            </button>
+          </div>
         </nav>
 
         <div className="container" >

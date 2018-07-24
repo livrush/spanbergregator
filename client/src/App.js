@@ -2,37 +2,43 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import Articles from './components/Articles.js';
+import Tweets from './components/Tweets.js';
 import VoteInfo from './components/VoteInfo.js';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      data: [],
       query: 'abigail+spanberger',
-      articles: [],
-      votes: [],
-      dataVisible: true,
+      display: 'propublica',
     };
-    this.toggleData = this.toggleData.bind(this);
+    this.queryPress = this.queryPress.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
-    this.updateSearch = this.updateSearch.bind(this);
+    // this.queryTwitter = this.queryTwitter.bind(this);
+    this.displayContent = this.displayContent.bind(this);
+    this.queryPropublica = this.queryPropublica.bind(this);
   }
 
   componentDidMount() {
     const { query } = this.state;
-    this.updateSearch(query);
-    this.queryVoteData();
+    this.queryPropublica();
+    this.queryPress(query);
   }
 
-  displayContent(showData) {
-    if (showData) {
-      return (<VoteInfo votes={this.state.votes}></VoteInfo>);
-    } else {
-      return (<Articles articles={this.state.articles} ></Articles>);
+  displayContent(display) {
+    const { data, query } = this.state;
+    console.log(display);
+    if (display === 'propublica') {
+      return (<VoteInfo votes={ data }></VoteInfo>);
+    } else if (display === 'twitter') {
+      return (<Tweets articles={ data } ></Tweets>);
+    } else if (display === 'press') {
+      return (<Articles articles={ data } ></Articles>);
     }
   }
 
-  queryVoteData() {
+  queryPropublica() {
     const app = this;
     axios({
       method: 'get',
@@ -41,30 +47,21 @@ class App extends Component {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       },
-    }).then(function (response) {
-      console.log(response);
+    }).then(function ({ data }) {
       app.setState({
-        votes: response.data,
-        dataVisible: true,
+        data,
+        display: 'propublica',
       });
     });
   }
 
-  toggleData() {
-    const { dataVisible } = this.state;
-    this.setState({
-      dataVisible: !dataVisible,
-    });
-  }
-
   updateQuery({ target }) {
-    console.log(target.value);
     this.setState({
       [target.name]: target.value
     });
   }
 
-  updateSearch(query) {
+  queryPress(query) {
     const app = this;
     app.setState({ query });
     axios({
@@ -74,11 +71,10 @@ class App extends Component {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       },
-    }).then(function (response) {
-      console.log(response);
+    }).then(function ({ data }) {
       app.setState({
-        articles: response.data,
-        dataVisible: false,
+        data,
+        display: 'press',
       });
     });
   }
@@ -101,7 +97,7 @@ class App extends Component {
             <div className="input-group-append">
               <button
                 className="btn btn-outline-light"
-                onClick={() => this.updateSearch(this.state.query)}
+                onClick={() => this.queryPress(this.state.query)}
                 type="submit"
               >
                 Search
@@ -117,7 +113,7 @@ class App extends Component {
                 <a
                   className="nav-link border-primary border-bottom-0 mr-1"
                   // href="#"
-                  onClick={() => this.updateSearch('abigail+spanberger')}
+                  onClick={() => this.queryPress('abigail+spanberger')}
                   >
                     <i className="fas fa-newspaper"></i>
                   </a>
@@ -126,7 +122,7 @@ class App extends Component {
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
                   // href="#"
-                  onClick={() => this.updateSearch('dave+brat')}
+                  onClick={() => this.queryPress('dave+brat')}
                 >
                   <i className="fas fa-newspaper"></i>
                 </a>
@@ -135,7 +131,7 @@ class App extends Component {
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
                   // href="#"
-                  // onClick={() => this.updateSearch('dave+brat')}
+                  // onClick={() => this.queryPress('dave+brat')}
                 >
                   <i className="fab fa-twitter"></i>
                 </a>
@@ -144,7 +140,7 @@ class App extends Component {
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
                   // href="#"
-                  // onClick={() => this.updateSearch('dave+brat')}
+                  // onClick={() => this.queryPress('dave+brat')}
                 >
                   <i className="fab fa-facebook"></i>
                 </a>
@@ -153,7 +149,7 @@ class App extends Component {
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
                   // href="#"
-                  onClick={this.toggleData}
+                  onClick={this.queryPropublica}
                 >
                   <i className="fas fa-gavel"></i>
                 </a>
@@ -161,7 +157,7 @@ class App extends Component {
             </ul>
           </div>
           <div className="">
-            { this.displayContent(this.state.dataVisible) }
+            { this.displayContent(this.state.display) }
           </div>
         </div>
         <footer>

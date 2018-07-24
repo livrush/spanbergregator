@@ -72,7 +72,11 @@ app.get('/newsApi', function (req, res) {
 });
 
 app.get('/twitter/timeline', function (req, res) {
+    console.log('hit')
     twitter.getTimeline("user", {
+        count: 100,
+        include_rts: true,
+        exclude_replies: false,
         screen_name: 'RepDaveBrat',
     },
     TwitterAccessToken,

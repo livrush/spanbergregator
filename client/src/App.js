@@ -11,11 +11,11 @@ class App extends Component {
     this.state = {
       data: [],
       query: 'abigail+spanberger',
-      display: 'propublica',
+      display: 'twitter',
     };
     this.queryPress = this.queryPress.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
-    // this.queryTwitter = this.queryTwitter.bind(this);
+    this.queryTwitter = this.queryTwitter.bind(this);
     this.displayContent = this.displayContent.bind(this);
     this.queryPropublica = this.queryPropublica.bind(this);
   }
@@ -24,6 +24,7 @@ class App extends Component {
     const { query } = this.state;
     this.queryPropublica();
     this.queryPress(query);
+    this.queryTwitter();
   }
 
   displayContent(display) {
@@ -32,7 +33,7 @@ class App extends Component {
     if (display === 'propublica') {
       return (<VoteInfo votes={ data }></VoteInfo>);
     } else if (display === 'twitter') {
-      return (<Tweets articles={ data } ></Tweets>);
+      return (<Tweets tweets={ data } ></Tweets>);
     } else if (display === 'press') {
       return (<Articles articles={ data } ></Articles>);
     }
@@ -43,21 +44,11 @@ class App extends Component {
     axios({
       method: 'get',
       url: '/propublica',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      },
     }).then(function ({ data }) {
       app.setState({
         data,
         display: 'propublica',
       });
-    });
-  }
-
-  updateQuery({ target }) {
-    this.setState({
-      [target.name]: target.value
     });
   }
 
@@ -67,15 +58,31 @@ class App extends Component {
     axios({
       method: 'get',
       url: `/newsApi?q=${query}`,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      },
     }).then(function ({ data }) {
       app.setState({
         data,
         display: 'press',
       });
+    });
+  }
+
+  queryTwitter() {
+    const app = this;
+    axios({
+      method: 'get',
+      url: '/twitter/timeline',
+    }).then(function ({ data }) {
+      console.log(data[0]);
+      app.setState({
+        data,
+        display: 'twitter',
+      });
+    });
+  }
+
+  updateQuery({ target }) {
+    this.setState({
+      [target.name]: target.value
     });
   }
 
@@ -131,7 +138,7 @@ class App extends Component {
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
                   // href="#"
-                  // onClick={() => this.queryPress('dave+brat')}
+                  onClick={ this.queryTwitter }
                 >
                   <i className="fab fa-twitter"></i>
                 </a>
@@ -140,7 +147,7 @@ class App extends Component {
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
                   // href="#"
-                  // onClick={() => this.queryPress('dave+brat')}
+                  // onClick={ this.queryTwitter }
                 >
                   <i className="fab fa-facebook"></i>
                 </a>
@@ -149,7 +156,7 @@ class App extends Component {
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
                   // href="#"
-                  onClick={this.queryPropublica}
+                  onClick={ this.queryPropublica }
                 >
                   <i className="fas fa-gavel"></i>
                 </a>

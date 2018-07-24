@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import Articles from './components/Articles.js'
-import VoteInfo from './components/VoteInfo.js'
+import Articles from './components/Articles.js';
+import VoteInfo from './components/VoteInfo.js';
 
 class App extends Component {
   constructor() {
@@ -36,14 +36,16 @@ class App extends Component {
     const app = this;
     axios({
       method: 'get',
-      url: 'https://api.propublica.org/congress/v1/members/B001290/votes.json',
+      url: '/propublica',
       headers: {
-        'x-api-key':  'JbT5mzD7762Hvb6MKt1x4b8IX3F30xjtlKpo2o5m',
-      }
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
     }).then(function (response) {
-      console.log(response.data.results[0]);
+      console.log(response);
       app.setState({
-        votes: response.data.results[0].votes,
+        votes: response.data,
+        dataVisible: true,
       });
     });
   }
@@ -67,13 +69,15 @@ class App extends Component {
     app.setState({ query });
     axios({
       method: 'get',
-      url: `https://newsapi.org/v2/everything?q=${query}&pageSize=100&sortBy=publishedAt`,
+      url: `/newsApi?q=${query}`,
       headers: {
-        'x-api-key':   '8f8b71f87bd146268d85ec6f6fa337ac',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       },
     }).then(function (response) {
+      console.log(response);
       app.setState({
-        articles: response.data.articles,
+        articles: response.data,
         dataVisible: false,
       });
     });
@@ -112,7 +116,7 @@ class App extends Component {
               <li className="nav-item">
                 <a
                   className="nav-link border-primary border-bottom-0 mr-1"
-                  href="#"
+                  // href="#"
                   onClick={() => this.updateSearch('abigail+spanberger')}
                   >
                     <i className="fas fa-newspaper"></i>
@@ -121,7 +125,7 @@ class App extends Component {
               <li className="nav-item">
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
-                  href="#"
+                  // href="#"
                   onClick={() => this.updateSearch('dave+brat')}
                 >
                   <i className="fas fa-newspaper"></i>
@@ -130,7 +134,7 @@ class App extends Component {
               <li className="nav-item">
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
-                  href="#"
+                  // href="#"
                   // onClick={() => this.updateSearch('dave+brat')}
                 >
                   <i className="fab fa-twitter"></i>
@@ -139,7 +143,7 @@ class App extends Component {
               <li className="nav-item">
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
-                  href="#"
+                  // href="#"
                   // onClick={() => this.updateSearch('dave+brat')}
                 >
                   <i className="fab fa-facebook"></i>
@@ -148,7 +152,7 @@ class App extends Component {
               <li className="nav-item">
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
-                  href="#"
+                  // href="#"
                   onClick={this.toggleData}
                 >
                   <i className="fas fa-gavel"></i>
@@ -158,16 +162,11 @@ class App extends Component {
           </div>
           <div className="">
             { this.displayContent(this.state.dataVisible) }
-            {/* <VoteInfo votes={this.state.votes}></VoteInfo>
-            <Articles articles={this.state.articles} ></Articles> */}
-            {/* <ul className="list-group border-top-0">
-              { this.generateList(this.state.articles) }
-            </ul> */}
           </div>
         </div>
         <footer>
           <p>
-            Made with NewsApi
+            Made with NewsApi, Propublica
           </p>
         </footer>
       </div>

@@ -6,7 +6,7 @@ const Article = ({ article }) => (
     <li className="article list-group-item">
         <div className="row">
             <div className="col-4">
-                <img className="article-img" src={article.urlToImage} />
+                <img className="article-img" alt="Article Img" src={article.urlToImage} />
                 <p> { article.source.name } </p>
                 <p> { moment(article.publishedAt).format("dddd, MMMM Do") } </p>
             </div>

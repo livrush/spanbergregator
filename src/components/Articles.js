@@ -1,9 +1,10 @@
 import React from 'react';
 import Article from './Article.js';
+import uuid from 'uuid/v1';
 
 const Articles = ({ articles }) => {
     const generateList = function(articles) {
-        return articles.map(article => <Article article={article}></Article>);
+        return articles.map(article => <Article key={uuid()} article={article}></Article>);
     };
 
     return (

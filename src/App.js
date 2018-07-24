@@ -11,7 +11,7 @@ class App extends Component {
       query: 'abigail+spanberger',
       articles: [],
       votes: [],
-      dataVisible: false,
+      dataVisible: true,
     };
     this.toggleData = this.toggleData.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
@@ -108,7 +108,7 @@ class App extends Component {
 
         <div className="container" >
           <div className="container" >
-            <ul className="nav nav-tabs">
+            <ul className="nav nav-tabs border-bottom-0">
               <li className="nav-item">
                 <a
                   className="nav-link border-primary border-bottom-0 mr-1"

@@ -1,9 +1,10 @@
 import React from 'react';
 import Vote from './Vote.js';
+import uuid from 'uuid/v1';
 
 const VoteInfo = ({ votes }) => {
-    console.log(votes);
-    const voteDivs = votes.map(voteInfo =><Vote vote={voteInfo}></Vote>);
+    const voteDivs = votes.map(voteInfo =><Vote key={uuid()} vote={voteInfo}></Vote>);
+
     return (
     <div className="vote-info list-group-item">
         <a href="https://www.govtrack.us/congress/members/david_brat/412605" target="_blank">

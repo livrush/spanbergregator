@@ -1,25 +1,16 @@
 import React from 'react';
+import Article from './Article.js';
 
-const Articles = ({ article }) => (
-    <li className="article list-group-item">
-        <div className="row">
-            <div className="col-4">
-                <img className="article-img" src={article.urlToImage} />
-                <p> { article.source.name } </p>
-                <p> { article.publishedAt } </p>
-            </div>
-            <div className="col-8">
-                <p>
-                    <a href={ article.url } target="_blank">
-                        { article.title }
-                    </a>
-                </p>
-                <p>
-                    { article.description }
-                </p>
-            </div>
-        </div>
-    </li>
-);
+const Articles = ({ articles }) => {
+    const generateList = function(articles) {
+        return articles.map(article => <Article article={article}></Article>);
+    };
+
+    return (
+        <ul className="list-group border-top-0">
+            { generateList(articles) }
+        </ul>
+    );
+};
 
 export default Articles;

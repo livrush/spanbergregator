@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import Article from './components/Article.js'
+import Articles from './components/Articles.js'
 import VoteInfo from './components/VoteInfo.js'
 
 class App extends Component {
@@ -21,6 +21,15 @@ class App extends Component {
   componentDidMount() {
     const { query } = this.state;
     this.updateSearch(query);
+    this.queryVoteData();
+  }
+
+  displayContent(showData) {
+    if (showData) {
+      return (<VoteInfo votes={this.state.votes}></VoteInfo>);
+    } else {
+      return (<Articles articles={this.state.articles} ></Articles>);
+    }
   }
 
   queryVoteData() {
@@ -44,11 +53,6 @@ class App extends Component {
     this.setState({
       dataVisible: !dataVisible,
     });
-    this.queryVoteData();
-  }
-
-  generateList(articles) {
-    return articles.map(article => <Article article={article}></Article>);
   }
 
   updateQuery({ target }) {
@@ -69,7 +73,8 @@ class App extends Component {
       },
     }).then(function (response) {
       app.setState({
-        articles: response.data.articles
+        articles: response.data.articles,
+        dataVisible: false,
       });
     });
   }
@@ -109,29 +114,55 @@ class App extends Component {
                   className="nav-link border-primary border-bottom-0 mr-1"
                   href="#"
                   onClick={() => this.updateSearch('abigail+spanberger')}
-                  >Spanberger</a>
+                  >
+                    <i className="fas fa-newspaper"></i>
+                  </a>
               </li>
               <li className="nav-item">
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
                   href="#"
                   onClick={() => this.updateSearch('dave+brat')}
-                >Brat</a>
+                >
+                  <i className="fas fa-newspaper"></i>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link text-danger border-danger border-bottom-0 mr-1"
+                  href="#"
+                  // onClick={() => this.updateSearch('dave+brat')}
+                >
+                  <i className="fab fa-twitter"></i>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link text-danger border-danger border-bottom-0 mr-1"
+                  href="#"
+                  // onClick={() => this.updateSearch('dave+brat')}
+                >
+                  <i className="fab fa-facebook"></i>
+                </a>
               </li>
               <li className="nav-item">
                 <a
                   className="nav-link text-danger border-danger border-bottom-0 mr-1"
                   href="#"
                   onClick={this.toggleData}
-                >Votes</a>
+                >
+                  <i className="fas fa-gavel"></i>
+                </a>
               </li>
             </ul>
           </div>
           <div className="">
-            <VoteInfo votes={this.state.votes}></VoteInfo>
-            <ul className="list-group border-top-0">
+            { this.displayContent(this.state.dataVisible) }
+            {/* <VoteInfo votes={this.state.votes}></VoteInfo>
+            <Articles articles={this.state.articles} ></Articles> */}
+            {/* <ul className="list-group border-top-0">
               { this.generateList(this.state.articles) }
-            </ul>
+            </ul> */}
           </div>
         </div>
         <footer>

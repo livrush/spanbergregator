@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import Articles from './components/Articles.js';
-import Tweets from './components/Tweets.js';
-import VoteInfo from './components/VoteInfo.js';
+import Articles from './components/Articles';
+import Tweets from './components/Tweets';
+import VoteInfo from './components/VoteInfo';
 
 class App extends Component {
   constructor() {
@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       data: [],
       query: 'abigail+spanberger',
-      display: 'twitter',
+      display: 'propublica',
     };
     this.queryPress = this.queryPress.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
@@ -22,14 +22,13 @@ class App extends Component {
 
   componentDidMount() {
     const { query } = this.state;
-    this.queryPropublica();
     this.queryPress(query);
     this.queryTwitter();
+    this.queryPropublica();
   }
 
   displayContent(display) {
     const { data, query } = this.state;
-    console.log(display);
     if (display === 'propublica') {
       return (<VoteInfo votes={ data }></VoteInfo>);
     } else if (display === 'twitter') {
@@ -72,7 +71,6 @@ class App extends Component {
       method: 'get',
       url: '/twitter/timeline',
     }).then(function ({ data }) {
-      console.log(data[0]);
       app.setState({
         data,
         display: 'twitter',
@@ -118,7 +116,7 @@ class App extends Component {
             <ul className="nav nav-tabs border-bottom-0">
               <li className="nav-item">
                 <a
-                  className="nav-link border-primary border-bottom-0 mr-1"
+                  className="nav-link text-primary border-primary border-bottom-0 mr-1"
                   // href="#"
                   onClick={() => this.queryPress('abigail+spanberger')}
                   >

@@ -1,5 +1,5 @@
 import React from 'react';
-import Article from './Article.js';
+import Article from './Article';
 import uuid from 'uuid/v1';
 
 const Articles = ({ articles }) => {

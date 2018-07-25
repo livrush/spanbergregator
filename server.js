@@ -22,16 +22,6 @@ const twitter = new twitterAPI({
     consumerSecret: TwitterConsumerSecret,
 });
 
-// const key = fs.readFileSync('./encryption/private.key');
-// const cert = fs.readFileSync('./encryption/primary.crt');
-// const ca = fs.readFileSync('./encryption/intermediate.crt');
-
-// const options = {
-//     key: key,
-//     cert: cert,
-//     ca: ca
-// };
-
 const app = express();
 app.use(express.static(path.join(__dirname, '/client')));
 app.use(bodyParser.urlencoded({
@@ -72,7 +62,6 @@ app.get('/newsApi', function (req, res) {
 });
 
 app.get('/twitter/timeline', function (req, res) {
-    console.log('hit')
     twitter.getTimeline("user", {
         count: 100,
         include_rts: true,
@@ -84,9 +73,7 @@ app.get('/twitter/timeline', function (req, res) {
     function (error, data, response) {
         if (error) {
             console.error(error);
-            // something went wrong
         } else {
-            // data contains the data sent by twitter
             res.send(data);
         }
     }
@@ -94,4 +81,3 @@ app.get('/twitter/timeline', function (req, res) {
 });
 
 app.listen(PORT, () => console.warn(`Listening on http://localhost:${PORT}`));
-// https.createServer(options, app).listen(443);

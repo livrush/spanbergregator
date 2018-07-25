@@ -1,5 +1,5 @@
 import React from 'react';
-import Tweet from './Tweet.js';
+import Tweet from './Tweet';
 import uuid from 'uuid/v1';
 
 const Tweets = ({ tweets }) => {

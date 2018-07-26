@@ -10,7 +10,7 @@ const Tweet = ({ tweet }) => {
         } else if (quote) {
             return 'tweet-quote';
         } else if (reply && _.get(tweet, "in_reply_to_screen_name") === tweet.user.screen_name) {
-            return 'bg-light';
+            return 'tweet-reply-self';
         } else if (reply) {
             return 'tweet-reply';
         }

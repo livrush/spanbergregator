@@ -25,12 +25,10 @@ class App extends Component {
   componentDidMount() {
     const { query } = this.state;
     this.queryPress(query);
-    // this.queryTwitter();
-    // this.queryPropublica();
   }
 
   displayContent(display) {
-    const { data, query } = this.state;
+    const { data } = this.state;
     if (display === 'propublica') {
       return (<VoteInfo votes={ data }></VoteInfo>);
     } else if (display === 'twitter') {
@@ -90,7 +88,7 @@ class App extends Component {
     return (
       <div className="App">
         <nav className="navbar navbar-dark bg-primary mb-4 d-flex">
-          <a href="#" className="navbar-brand">
+          <a className="navbar-brand interactive">
             <span className="d-none d-sm-block" >Spanbergregator</span>
             <span className="d-sm-none" ><i className="fas fa-star"></i></span>
           </a>

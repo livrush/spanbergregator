@@ -23,7 +23,7 @@ const Tweet = ({ tweet }) => {
         if (text.slice(0, 2) === 'RT' || quote || (reply && _.get(tweet, "in_reply_to_screen_name") !== tweet.user.screen_name)) {
             if (text.slice(0, 2) === 'RT') {
                 action = 'Retweeted';
-                name = text.match(/(\@)\w+/)[0];
+                name = text.match(/(@)\w+/)[0];
                 link = `https://www.twitter.com/${name.slice(1)}`;
                 tweetUrl = `${link}/status/${_.get(tweet, "retweeted_status.id_str")}`;
             } else if (quote) {

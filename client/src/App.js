@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import config from './config'
+import Loader from './components/Loader';
 import Navbar from './components/Navbar';
 import Articles from './components/Articles';
 import Tweets from './components/Tweets';
@@ -13,7 +14,7 @@ class App extends Component {
     this.state = {
       data: [],
       query: config.candidateName,
-      display: '',
+      display: 'loader',
     };
     this.queryPress = this.queryPress.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
@@ -29,7 +30,9 @@ class App extends Component {
 
   displayContent(display) {
     const { data } = this.state;
-    if (display === 'propublica') {
+    if (display === 'loader') {
+      return (<Loader></Loader>);
+    } else if (display === 'propublica') {
       return (<VoteInfo votes={ data }></VoteInfo>);
     } else if (display === 'twitter') {
       return (<Tweets tweets={ data }></Tweets>);
@@ -38,8 +41,15 @@ class App extends Component {
     }
   }
 
+  showLoader() {
+    this.setState({
+      display: 'loader',
+    });
+  }
+
   queryPropublica() {
     const app = this;
+    app.showLoader();
     axios({
       method: 'get',
       url: '/propublica',
@@ -53,6 +63,7 @@ class App extends Component {
 
   queryPress(query, type) {
     const app = this;
+    app.showLoader();
     const display = type ? 'press-' + type : 'press';
     app.setState({ query });
     axios({
@@ -68,6 +79,7 @@ class App extends Component {
 
   queryTwitter(username) {
     const app = this;
+    app.showLoader();
     axios({
       method: 'get',
       url: `/twitter/timeline?u=${username}`,
@@ -120,7 +132,7 @@ class App extends Component {
             queryPropublica={this.queryPropublica}
         ></Navbar>
 
-          <div className="">
+          <div className="content">
             { this.displayContent(this.state.display) }
           </div>
         </main>

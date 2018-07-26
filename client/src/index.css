@@ -5,6 +5,19 @@ body {
   background-color: #1b4062;
 }
 
+.text-dark-blue {
+  color: #1b4062;
+}
+
+.container-loader {
+  height: 50vh;
+}
+
+.loader {
+  animation: spin infinite 1s linear;
+  height: 50%;
+}
+
 .active-media,
 .app-nav-main {
   background-color: #8DC6E8!important;

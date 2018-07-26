@@ -18,19 +18,14 @@ Styled with `Bootstrap`, `Font-Awesome`
 
 ## To use:
 
-1. Clone this repo
+### Clone this repo
 
 ```
 $ git clone git@gitlab.com:digidems/spanbergregator.git
-```
-
-2. CD into directory
-
-```
 $ cd spangregator
 ```
 
-3. Install dependencies
+### Install dependencies
 
 For development purposes this project uses a proxy server, so there are two directories in which you will need to install dependencies, the `root` and `client`.
 
@@ -41,14 +36,16 @@ $ npm i
 $ cd ..
 ```
 
-4. Add environmental variables
+### Add environmental variables
 
-    1. Make a .env file in the `root` directory
-    1. You will need to get API keys for several services
-        * [Twitter](https://developer.twitter.com/en/docs.html)
-        * [NewsApi](https://newsapi.org/register)
-        * [Propublica](https://www.propublica.org/datastore/api/propublica-congress-api)
-    1. Should contain the following:
+1. Make a .env file in the `root` directory
+    * `/.env`
+1. You will need to get API keys for several services
+    * [Twitter](https://developer.twitter.com/en/docs.html)
+    * [NewsApi](https://newsapi.org/register)
+    * [Propublica](https://www.propublica.org/datastore/api/propublica-congress-api)
+1. Should contain the following:
+
 
 ```
 # General environment stuff
@@ -72,11 +69,13 @@ TwitterAccessTokenSecret=
 TwitterCallBackUrl=
 ```
 
-5. Add configs for your campaign
+### Add configs for your campaign
 
-These terms will be used to search the various APIs used in this app. 
+These terms will be used to search the various APIs used in this app.
 
-client/src/config.js
+Store in:
+
+`/client/src/config.js`
 
 ```javascript
 export default {

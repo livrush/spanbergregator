@@ -32,9 +32,9 @@ class App extends Component {
     if (display === 'propublica') {
       return (<VoteInfo votes={ data }></VoteInfo>);
     } else if (display === 'twitter') {
-      return (<Tweets tweets={ data } ></Tweets>);
+      return (<Tweets tweets={ data }></Tweets>);
     } else if (display === 'press') {
-      return (<Articles articles={ data } ></Articles>);
+      return (<Articles articles={ data }></Articles>);
     }
   }
 
@@ -87,36 +87,36 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav className="navbar navbar-dark bg-primary mb-4 d-flex">
+        <nav className="navbar mb-4 d-flex app-nav-main">
           <a className="navbar-brand interactive">
-            <span className="d-none d-sm-block" >Spanbergregator</span>
-            <span className="d-sm-none" ><i className="fas fa-star"></i></span>
+            <span className="d-none d-sm-block">Spanbergregator</span>
+            <span className="d-sm-none"><i className="fas fa-star"></i></span>
           </a>
-          <form className="input-group w-auto" onSubmit={ target => target.preventDefault() } >
+          <form className="input-group w-auto" onSubmit={ target => target.preventDefault() }>
             <input
               name="query"
-              className="form-control"
+              className="form-control border-primary"
               placeholder="Free Search"
               onChange={ this.updateQuery }
             />
             <div className="input-group-append">
               <button
-                className="btn btn-outline-light"
+                className="btn btn-primary"
                 onClick={() => this.queryPress(this.state.query)}
                 type="submit"
-              >
+            >
                 Search
               </button>
             </div>
           </form>
         </nav>
 
-        <main className="container" >
+        <main className="container">
           <Navbar
             queryPress={this.queryPress}
             queryTwitter={this.queryTwitter}
             queryPropublica={this.queryPropublica}
-          ></Navbar>
+        ></Navbar>
 
           <div className="">
             { this.displayContent(this.state.display) }

@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import _ from 'lodash';
+import config from '../config';
 
 const Navbar = ({
     queryPress,
@@ -12,7 +13,7 @@ const Navbar = ({
             <li className="nav-item interactive">
                 <a
                     className="nav-link text-primary border-primary border-bottom-0 mr-1"
-                    onClick={() => queryPress('abigail+spanberger')}
+                    onClick={() => queryPress(config.candidateName)}
                 >
                     <i className="fas fa-newspaper"></i>
                 </a>
@@ -20,7 +21,7 @@ const Navbar = ({
             <li className="nav-item interactive">
                 <a
                     className="nav-link text-danger border-danger border-bottom-0 mr-1"
-                    onClick={() => queryPress('dave+brat')}
+                    onClick={() => queryPress(config.opponentName)}
                 >
                     <i className="fas fa-newspaper"></i>
                 </a>
@@ -28,7 +29,7 @@ const Navbar = ({
             <li className="nav-item interactive">
                 <a
                     className="nav-link text-danger border-danger border-bottom-0 mr-1"
-                    onClick={queryTwitter}
+                    onClick={() => queryTwitter(config.opponentTwitter)}
                 >
                     <i className="fab fa-twitter"></i>
                 </a>

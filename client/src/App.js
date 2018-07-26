@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import config from './config'
 import Navbar from './components/Navbar';
 import Articles from './components/Articles';
 import Tweets from './components/Tweets';
@@ -11,7 +12,7 @@ class App extends Component {
     super();
     this.state = {
       data: [],
-      query: 'abigail+spanberger',
+      query: config.candidateName,
       display: null,
     };
     this.queryPress = this.queryPress.bind(this);

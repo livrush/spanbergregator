@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import Navbar from './components/Navbar';
 import Articles from './components/Articles';
 import Tweets from './components/Tweets';
 import VoteInfo from './components/VoteInfo';
@@ -11,7 +12,7 @@ class App extends Component {
     this.state = {
       data: [],
       query: 'abigail+spanberger',
-      display: 'propublica',
+      display: null,
     };
     this.queryPress = this.queryPress.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
@@ -23,8 +24,8 @@ class App extends Component {
   componentDidMount() {
     const { query } = this.state;
     this.queryPress(query);
-    this.queryTwitter();
-    this.queryPropublica();
+    // this.queryTwitter();
+    // this.queryPropublica();
   }
 
   displayContent(display) {
@@ -111,60 +112,18 @@ class App extends Component {
           </form>
         </nav>
 
-        <div className="container" >
-          <div className="container" >
-            <ul className="nav nav-tabs border-bottom-0">
-              <li className="nav-item">
-                <a
-                  className="nav-link text-primary border-primary border-bottom-0 mr-1"
-                  // href="#"
-                  onClick={() => this.queryPress('abigail+spanberger')}
-                  >
-                    <i className="fas fa-newspaper"></i>
-                  </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link text-danger border-danger border-bottom-0 mr-1"
-                  // href="#"
-                  onClick={() => this.queryPress('dave+brat')}
-                >
-                  <i className="fas fa-newspaper"></i>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link text-danger border-danger border-bottom-0 mr-1"
-                  // href="#"
-                  onClick={ this.queryTwitter }
-                >
-                  <i className="fab fa-twitter"></i>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link text-danger border-danger border-bottom-0 mr-1"
-                  // href="#"
-                  // onClick={ this.queryTwitter }
-                >
-                  <i className="fab fa-facebook"></i>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link text-danger border-danger border-bottom-0 mr-1"
-                  // href="#"
-                  onClick={ this.queryPropublica }
-                >
-                  <i className="fas fa-gavel"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
+        <main className="container" >
+          <Navbar
+            queryPress={this.queryPress}
+            queryTwitter={this.queryTwitter}
+            queryPropublica={this.queryPropublica}
+          ></Navbar>
+
           <div className="">
             { this.displayContent(this.state.display) }
           </div>
-        </div>
+        </main>
+
         <footer>
           <p>
             Made with NewsApi, Propublica

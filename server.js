@@ -8,77 +8,83 @@ const path = require('path');
 const axios = require('axios');
 const twitterAPI = require('node-twitter-api')
 
-const PropublicaApiKey = process.env.PROPUBLICA;
-const NewsApiKey = process.env.NEWSAPI;
-const TwitterConsumerKey = process.env.consumerKey;
-const TwitterConsumerSecret = process.env.consumerSecret;
-const TwitterAccessToken = process.env.accessToken;
-const TwitterAccessTokenSecret = process.env.accessTokenSecret;
-const TwitterCallBackUrl = process.env.callBackUrl;
-const PORT = process.env.PORT;
+const {
+  PropublicaApiKey,
+  NewsApiKey,
+  TwitterConsumerKey,
+  TwitterConsumerSecret,
+  TwitterAccessToken,
+  TwitterAccessTokenSecret,
+  TwitterCallBackUrl,
+  PORT,
+} = process.env;
 
 const twitter = new twitterAPI({
-    consumerKey: TwitterConsumerKey,
-    consumerSecret: TwitterConsumerSecret,
+  consumerKey: TwitterConsumerKey,
+  consumerSecret: TwitterConsumerSecret,
 });
 
 const app = express();
+
 app.use(express.static(path.join(__dirname, '/client')));
+
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
+
 app.use(bodyParser.json());
+
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
 });
 
 
 
 app.get('/propublica', function (req, res) {
-    axios({
-        method: 'get',
-        url: 'https://api.propublica.org/congress/v1/members/B001290/votes.json',
-        headers: {
-            'x-api-key': PropublicaApiKey,
-        }
-    }).then(function (response) {
-        res.send(response.data.results[0].votes);
-    });
+  axios({
+    method: 'get',
+    url: 'https://api.propublica.org/congress/v1/members/B001290/votes.json',
+    headers: {
+      'x-api-key': PropublicaApiKey,
+    }
+  }).then(function (response) {
+    res.send(response.data.results[0].votes);
+  });
 });
 
 app.get('/newsApi', function (req, res) {
-    const query = req.query.q;
-    axios({
-        method: 'get',
-        url: `https://newsapi.org/v2/everything?q=${query}&pageSize=100&sortBy=publishedAt`,
-        headers: {
-            'x-api-key': NewsApiKey,
-        },
-    }).then(function (response) {
-        res.send(response.data.articles);
-    });
+  const query = req.query.q;
+  axios({
+    method: 'get',
+    url: `https://newsapi.org/v2/everything?q=${query}&pageSize=100&sortBy=publishedAt`,
+    headers: {
+      'x-api-key': NewsApiKey,
+    },
+  }).then(function (response) {
+    res.send(response.data.articles);
+  });
 });
 
 app.get('/twitter/timeline', function (req, res) {
-    const username = req.query.u;
-    twitter.getTimeline("user", {
-        count: 100,
-        include_rts: true,
-        exclude_replies: false,
-        screen_name: username,
+  const username = req.query.u;
+  twitter.getTimeline("user", {
+      count: 100,
+      include_rts: true,
+      exclude_replies: false,
+      screen_name: username,
     },
     TwitterAccessToken,
     TwitterAccessTokenSecret,
     function (error, data, response) {
-        if (error) {
-            console.error(error);
-        } else {
-            res.send(data);
-        }
+      if (error) {
+        console.error(error);
+      } else {
+        res.send(data);
+      }
     }
-);
+  );
 });
 
 app.listen(PORT, () => console.warn(`Listening on http://localhost:${PORT}`));

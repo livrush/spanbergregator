@@ -62,11 +62,12 @@ app.get('/newsApi', function (req, res) {
 });
 
 app.get('/twitter/timeline', function (req, res) {
+    const username = req.query.u;
     twitter.getTimeline("user", {
         count: 100,
         include_rts: true,
         exclude_replies: false,
-        screen_name: 'RepDaveBrat',
+        screen_name: username,
     },
     TwitterAccessToken,
     TwitterAccessTokenSecret,

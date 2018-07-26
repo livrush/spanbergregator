@@ -67,11 +67,11 @@ class App extends Component {
     });
   }
 
-  queryTwitter() {
+  queryTwitter(username) {
     const app = this;
     axios({
       method: 'get',
-      url: '/twitter/timeline',
+      url: `/twitter/timeline?u=${username}`,
     }).then(function ({ data }) {
       app.setState({
         data,

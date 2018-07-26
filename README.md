@@ -84,4 +84,9 @@ export default {
   opponentTwitter: '',
 };
 ```
+### Contribute
 
+My wishlist:
+
+* Cache data from API calls to reduce call count
+* Group articles that are posted to multiple sources

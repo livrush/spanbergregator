@@ -90,3 +90,4 @@ My wishlist:
 
 * Cache data from API calls to reduce call count
 * Group articles that are posted to multiple sources
+* Swap votes when candidate is incumbent/challenger

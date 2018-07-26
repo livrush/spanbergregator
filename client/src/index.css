@@ -5,8 +5,9 @@ body {
   background-color: #1b4062;
 }
 
+.active-media,
 .app-nav-main {
-  background-color: #8DC6E8;
+  background-color: #8DC6E8!important;
 }
 
 .article-img {
@@ -24,13 +25,17 @@ body {
 }
 
 .tweet-retweet {
-  background-color: #28a74522;
+  background-color: #e3f3e7;
 }
 
 .tweet-quote {
-  background-color: #ffc10722;
+  background-color: #fff8e1;
 }
 
 .tweet-reply {
-  background-color: #dc354522;
+  background-color: #ffccbc;
+}
+
+.tweet-reply-self {
+  background-color: #eee;
 }

@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       data: [],
       query: config.candidateName,
-      display: null,
+      display: '',
     };
     this.queryPress = this.queryPress.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
@@ -24,7 +24,7 @@ class App extends Component {
 
   componentDidMount() {
     const { query } = this.state;
-    this.queryPress(query);
+    this.queryPress(query, 'candidate');
   }
 
   displayContent(display) {
@@ -33,7 +33,7 @@ class App extends Component {
       return (<VoteInfo votes={ data }></VoteInfo>);
     } else if (display === 'twitter') {
       return (<Tweets tweets={ data }></Tweets>);
-    } else if (display === 'press') {
+    } else if (display.indexOf('press') > -1) {
       return (<Articles articles={ data }></Articles>);
     }
   }
@@ -51,8 +51,9 @@ class App extends Component {
     });
   }
 
-  queryPress(query) {
+  queryPress(query, type) {
     const app = this;
+    const display = type ? 'press-' + type : 'press';
     app.setState({ query });
     axios({
       method: 'get',
@@ -60,7 +61,7 @@ class App extends Component {
     }).then(function ({ data }) {
       app.setState({
         data,
-        display: 'press',
+        display,
       });
     });
   }
@@ -113,6 +114,7 @@ class App extends Component {
 
         <main className="container">
           <Navbar
+            display={this.state.display}
             queryPress={this.queryPress}
             queryTwitter={this.queryTwitter}
             queryPropublica={this.queryPropublica}

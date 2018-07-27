@@ -43,9 +43,10 @@ app.use(function (req, res, next) {
 
 
 app.get('/propublica', function (req, res) {
+  const id = req.query.id;
   axios({
     method: 'get',
-    url: 'https://api.propublica.org/congress/v1/members/B001290/votes.json',
+    url: `https://api.propublica.org/congress/v1/members/${id}/votes.json`,
     headers: {
       'x-api-key': PropublicaApiKey,
     }

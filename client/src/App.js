@@ -52,7 +52,7 @@ class App extends Component {
     app.showLoader();
     axios({
       method: 'get',
-      url: '/propublica',
+      url: `/propublica?id=${config.opponentMemberId}`,
     }).then(function ({ data }) {
       app.setState({
         data,

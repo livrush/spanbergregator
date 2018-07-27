@@ -102,7 +102,7 @@ class App extends Component {
       <div className="App">
         <nav className="navbar mb-4 d-flex app-nav-main">
           <a className="navbar-brand interactive">
-            <span className="d-none d-sm-block">Spanbergregator</span>
+            <span className="d-none d-sm-block upper">Spanbergregator</span>
             <span className="d-sm-none"><i className="fas fa-star"></i></span>
           </a>
           <form className="input-group w-auto" onSubmit={ target => target.preventDefault() }>

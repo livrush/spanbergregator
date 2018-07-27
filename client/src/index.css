@@ -3,6 +3,11 @@ body {
   padding: 0;
   font-family: sans-serif;
   background-color: #1b4062;
+  font-family: 'Open Sans';
+}
+
+.upper {
+  text-transform: uppercase;
 }
 
 .text-dark-blue {

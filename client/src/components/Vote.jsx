@@ -111,6 +111,7 @@ const Vote = ({ vote }) => {
                 href={`https://projects.propublica.org/represent/votes/${
                   vote.congress
                 }/${vote.chamber}/${vote.session}/${vote.roll_call}`}
+                target="_blank"
               >
                 {vote.chamber} {vote.roll_call}
               </a>

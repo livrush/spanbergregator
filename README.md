@@ -1,5 +1,7 @@
 # Spanbergregator
 
+![Screenshot](./preview.png)
+
 A simple info aggregator for VA-07 campaign. What it does:
 
 * Collects and displays news articles from **NewsApi** about candidate and opponent
@@ -8,7 +10,7 @@ A simple info aggregator for VA-07 campaign. What it does:
   * Highlights retweets in green
   * Highlights quote replies in yellow
   * Highlights replies in red
-  * Highlights self-replies in almost-indistinguishable grey
+  * Highlights self-replies in grey
 * Collect and display info from **Propublica** about opponent's vote history
   * My campaign is not for an incumbent, so it may be worth adjusting this so the votes are not automatically taken from opponent's page on Propublica
 
@@ -46,7 +48,6 @@ $ cd ..
     * [Propublica](https://www.propublica.org/datastore/api/propublica-congress-api)
 1. Should contain the following:
 
-
 ```
 # General environment stuff
 
@@ -82,8 +83,14 @@ export default {
   candidateName: '',
   opponentName: '',
   opponentTwitter: '',
+  opponentMemberId: '',
 };
 ```
+
+You can find the member ID by searching for the representative [here](https://www.propublica.org/search) and grabbing it from the url to their profile.
+
+![Member ID Location](./member_id.png)
+
 ### Contribute
 
 My wishlist:

@@ -24,7 +24,7 @@ Styled with `Bootstrap`, `Font-Awesome`
 
 ```
 $ git clone git@gitlab.com:digidems/spanbergregator.git
-$ cd spangregator
+$ cd spanbergregator
 ```
 
 ### Install dependencies

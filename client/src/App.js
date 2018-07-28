@@ -138,7 +138,7 @@ class App extends Component {
         </main>
 
         <footer>
-          <p>
+          <p className="text-light m-3">
             Made with NewsApi, Propublica
           </p>
         </footer>

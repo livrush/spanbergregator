@@ -81,6 +81,8 @@ Store in:
 ```javascript
 export default {
   candidateName: '',
+  candidateTwitter: '',
+  candidateMemberId: '',
   opponentName: '',
   opponentTwitter: '',
   opponentMemberId: '',

@@ -56,16 +56,17 @@ app.get('/propublica', function (req, res) {
 });
 
 app.get('/propublica/finance', function (req, res) {
-  const id = req.query.id;
+  const candidateId = req.query.candidate;
+  const opponentId = req.query.opponent;
   axios({
     method: 'get',
-    url: `https://api.propublica.org/campaign-finance/v1/2018/candidates/${id}.json`,
+    url: `https://api.propublica.org/campaign-finance/v1/2018/candidates/${candidateId}.json`,
     headers: {
       'x-api-key': PropublicaApiKey,
     }
   }).then(function (response) {
     console.log(response.data);
-    res.send(response.data);
+    res.send(response.data.results[0]);
   });
 });
 

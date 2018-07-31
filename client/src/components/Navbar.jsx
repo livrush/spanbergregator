@@ -9,9 +9,7 @@ const Navbar = ({
   queryPropublicaFinance
 }) => {
   const validateActiveButton = (display, displayInstance) => {
-    console.log(display, displayInstance);
     if (display === displayInstance) return " active-media";
-
     return "";
   };
 
@@ -26,7 +24,7 @@ const Navbar = ({
             }
             onClick={queryPropublicaFinance}
           >
-            <i className="fas fa-money" />
+            <i className="fas fa-dollar-sign" />
           </a>
         </li>
         <li className="nav-item interactive">

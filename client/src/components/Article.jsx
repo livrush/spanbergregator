@@ -5,11 +5,13 @@ const Article = ({ article }) => (
   <li className="article list-group-item">
     <div className="row">
       <div className="col-4">
-        <img
-          className="article-img"
-          alt="Article Img"
-          src={article.urlToImage}
-        />
+        <a href={article.url} target="_blank">
+          <img
+            className="article-img"
+            alt="Article Img"
+            src={article.urlToImage}
+          />
+        </a>
         <p className="text-ellipsis"> {article.source.name} </p>
         <p> {moment(article.publishedAt).format("dddd, MMMM Do")} </p>
       </div>

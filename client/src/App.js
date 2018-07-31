@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 import Articles from './components/Articles';
 import Tweets from './components/Tweets';
 import VoteInfo from './components/VoteInfo';
-import Finance from './components/Finance';
+import Finances from './components/Finances';
 
 class App extends Component {
   constructor() {
@@ -39,7 +39,7 @@ class App extends Component {
     } else if (display === 'twitter') {
       return (<Tweets tweets={ data }></Tweets>);
     } else if (display === 'finance') {
-      return (<Finance data={ data }></Finance>);
+      return (<Finances data={ data }></Finances>);
     } else if (display.indexOf('press') > -1) {
       return (<Articles articles={ data }></Articles>);
     }

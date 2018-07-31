@@ -1,7 +1,8 @@
 require('dotenv').config();
 
 const fs = require('fs');
-var https = require('https');
+const https = require('https');
+const P = require('bluebird');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -58,15 +59,25 @@ app.get('/propublica', function (req, res) {
 app.get('/propublica/finance', function (req, res) {
   const candidateId = req.query.candidate;
   const opponentId = req.query.opponent;
-  axios({
+  const candidateInfo = axios({
     method: 'get',
     url: `https://api.propublica.org/campaign-finance/v1/2018/candidates/${candidateId}.json`,
     headers: {
       'x-api-key': PropublicaApiKey,
-    }
-  }).then(function (response) {
-    console.log(response.data);
-    res.send(response.data.results[0]);
+    },
+  });
+  const opponentInfo = axios({
+    method: 'get',
+    url: `https://api.propublica.org/campaign-finance/v1/2018/candidates/${opponentId}.json`,
+    headers: {
+      'x-api-key': PropublicaApiKey,
+    },
+  });
+  console.log('hello', candidateId, opponentId);
+  P.all([candidateInfo, opponentInfo])
+  .then(function ([candidate, opponent]) {
+    // console.log(typeof response);
+    res.send([candidate.data.results[0], opponent.data.results[0]]);
   });
 });
 

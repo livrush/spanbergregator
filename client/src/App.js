@@ -21,6 +21,7 @@ class App extends Component {
     this.queryTwitter = this.queryTwitter.bind(this);
     this.displayContent = this.displayContent.bind(this);
     this.queryPropublica = this.queryPropublica.bind(this);
+    this.queryPropublicaFinance = this.queryPropublicaFinance.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +58,20 @@ class App extends Component {
       app.setState({
         data,
         display: 'propublica',
+      });
+    });
+  }
+
+  queryPropublicaFinance() {
+    const app = this;
+    app.showLoader();
+    axios({
+      method: 'get',
+      url: `/propublica/finance?candidate=${config.candidateFECId}&opponent=${config.opponentFECId}`,
+    }).then(function ({ data }) {
+      app.setState({
+        data,
+        display: 'finance',
       });
     });
   }
@@ -130,6 +145,7 @@ class App extends Component {
             queryPress={this.queryPress}
             queryTwitter={this.queryTwitter}
             queryPropublica={this.queryPropublica}
+            queryPropublicaFinance={this.queryPropublicaFinance}
         ></Navbar>
 
           <div className="content">

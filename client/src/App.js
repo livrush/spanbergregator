@@ -27,7 +27,8 @@ class App extends Component {
 
   componentDidMount() {
     const { query } = this.state;
-    this.queryPress(query, 'candidate');
+    // this.queryPress(query, 'candidate');
+    this.queryPropublicaFinance()
   }
 
   displayContent(display) {

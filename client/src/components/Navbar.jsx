@@ -17,7 +17,6 @@ const Navbar = ({
 
   const displayButton = (...args) => _.every(args) ? '' : 'd-none';
 
-  console.log(displayButton(config.candidateMemberId));
   return <div className="container">
       <ul className="nav nav-tabs border-bottom-0">
         <li className={'nav-item interactive ' + displayButton(config.candidateName)}>

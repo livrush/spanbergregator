@@ -3,7 +3,6 @@ import moment from 'moment';
 import _ from 'lodash';
 
 const Tweet = ({ tweet }) => {
-    if (tweet.retweeted) console.log('HIT');
     const specifyTweetType = function(text, quote, reply) {
         if (text.slice(0, 2) === 'RT') {
             return 'tweet-retweet';
@@ -55,7 +54,7 @@ const Tweet = ({ tweet }) => {
                 userLink = `https://www.twitter.com/${user.screen_name}`;
                 userImg = user.profile_image_url_https;
             } else if (reply && _.get(tweet, "in_reply_to_screen_name") !== tweet.user.screen_name) {
-                console.log(tweet);
+                // console.log(tweet);
                 user = _.get(tweet, "entities", {});
                 userLink = `https://www.twitter.com/${tweet.in_reply_to_status_id_str}`;
                 userImg = tweet.in_reply_to_status_id_str;
@@ -74,7 +73,7 @@ const Tweet = ({ tweet }) => {
                     { addInteractionUser(tweet) }
                 </div>
                 <div className="col-10">
-                    <p> { addInteractionTag(tweet) } </p>
+                    { addInteractionTag(tweet) }
                     <p> { tweet.text } </p>
                     <div className="d-flex justify-content-around">
                         <p className="m-0 text-danger"> <i className="fas fa-heart"></i> { tweet.favorite_count } </p>

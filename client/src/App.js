@@ -72,7 +72,13 @@ class App extends Component {
     app.showLoader();
     axios({
       method: 'get',
-      url: `/propublica/finance?candidate=${config.candidateFECId}&opponent=${config.opponentFECId}`,
+      url: '/propublica/finance',
+      params: {
+        candidate: config.candidateFECId,
+        opponent: config.opponentFECId,
+        candidateCommittee: config.candidateCommitteeFECId,
+        opponentCommittee: config.opponentCommitteeFECId,
+      },
     }).then(function ({ data }) {
       app.setState({
         data,

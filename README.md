@@ -1,6 +1,6 @@
 # Spanbergregator
 
-![Screenshot](./preview.png)
+![Screenshot](./assets/preview.png)
 
 A simple info aggregator for VA-07 campaign. What it does:
 
@@ -83,15 +83,23 @@ export default {
   candidateName: '',
   candidateTwitter: '',
   candidateMemberId: '',
+  candidateFECId: '',
   opponentName: '',
   opponentTwitter: '',
   opponentMemberId: '',
+  opponentFECId: '',
 };
 ```
 
-You can find the member ID by searching for the representative [here](https://www.propublica.org/search) and grabbing it from the url to their profile.
+You can find the member ID by [locating the representative here on congress.gov](https://www.congress.gov/help/field-values/member-bioguide-ids).
 
-![Member ID Location](./member_id.png)
+**ONLY REPRESENTATIVES IN OFFICE WILL HAVE IDS**, as these are literally IDs for congress. If your candidate, or opponent, do not have an ID just leave the value an empty string, or `null`.
+
+![Member ID Location](./member-id-2.png)
+
+You can find the Federal Election Commission (FEC) ID by [searching for the representative here at fec.gov](https://www.fec.gov/) and grabbing it from their profile.
+
+![FEC ID Location]('./assets/fec-id.png)
 
 ### Contribute
 

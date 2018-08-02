@@ -29,7 +29,10 @@ const Finance = ({ data }) => {
           Available: '#28a745',
           Disbursed: '#dc3545'
         }
-      }
+      },
+      interaction: {
+        enabled: false,
+      },
     });
 
     var pie = bb.generate({
@@ -46,8 +49,8 @@ const Finance = ({ data }) => {
         }
       },
       interaction: {
-        enabled: false
-      }
+        enabled: false,
+      },
     });
 
     console.log(bar);
@@ -56,22 +59,20 @@ const Finance = ({ data }) => {
   return (
     <div className="container">
       <a href="">{data.name}</a>
-      <div class="row">
-        <div class="col-6 text-left font-weight-bold">
+      <div className="w-100 border-bottom my-2"></div>
+      <div className="row">
+        <div className="col-6 text-left font-weight-bold">
           Begin {moment(data.date_coverage_from).format('MM/DD/YY')}:
         </div>
-        <div class="col-6 text-right">${data.begin_cash}</div>
+        <div className="col-6 text-right">${data.begin_cash}</div>
       </div>
-      <div class="row">
-        <div class="col-6 text-left font-weight-bold">
+      <div className="row">
+        <div className="col-6 text-left font-weight-bold">
           End {moment(data.date_coverage_to).format('MM/DD/YY')}:
         </div>
-        <div class="col-6 text-right">${data.end_cash}</div>
+        <div className="col-6 text-right">${data.end_cash}</div>
       </div>
-      <h2>Contributions</h2>
-      {/* <div id={data.id + "-breakdown"} /> */}
-      <div id={data.id + '-usage'} />
-
+      <div className="w-100 border-bottom my-2"></div>
       <div className="row">
         <div className="col-6 font-weight-bold text-left">
           Total
@@ -101,6 +102,12 @@ const Finance = ({ data }) => {
         </div>
         <div className="col-6 text-right">${data.independent_expenditures}</div>
       </div>
+      <div className="w-100 border-bottom my-2"></div>
+
+      <h2>Usage</h2>
+      <div id={data.id + '-usage'} />
+      <div className="w-100 border-bottom my-2"></div>
+      <h2>Origin</h2>
       <div id={data.id + '-total-from'} />
     </div>
   );

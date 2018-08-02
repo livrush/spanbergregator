@@ -10,15 +10,28 @@ class Finance extends Component {
 
   componentDidMount() {
     const { candidateInfo, committeeInfo } = this.props;
-    var bar = bb.generate({
-      bindto: `#${candidateInfo.id}-breakdown`,
+    bb.generate({
+      bindto: `#${committeeInfo.id}-stats`,
       data: {
         type: 'bar',
         columns: [
-          ['Total Contributions', candidateInfo.total_contributions],
-          ['Total Disbursements', candidateInfo.total_disbursements],
-          ['Independent Expenditures', candidateInfo.independent_expenditures]
-        ]
+          ['Contributions', committeeInfo.total_contributions],
+          ['Individuals', committeeInfo.total_from_individuals],
+          ['PACs', committeeInfo.total_from_pacs],
+          ['Disbursements', committeeInfo.total_contributions - committeeInfo.total_disbursements],
+          ['Available', committeeInfo.total_disbursements],
+          // ['Total Disbursements', committeeInfo.total_disbursements],
+        ],
+        colors: {
+          Contributions: '#28a745',
+          Individuals: '#17a2b8',
+          PACs: '#ffc107',
+          Disbursements: '#dc3545',
+          Available: '#28a745',
+        }
+      },
+      interaction: {
+        enabled: false
       }
     });
 
@@ -67,7 +80,7 @@ class Finance extends Component {
     });
 
     bb.generate({
-      bindto: `#${candidateInfo.id}-total-from`,
+      bindto: `#${candidateInfo.id}-origin`,
       data: {
         type: 'donut',
         columns: [
@@ -85,7 +98,7 @@ class Finance extends Component {
     });
 
     bb.generate({
-      bindto: `#${committeeInfo.id}-total-from`,
+      bindto: `#${committeeInfo.id}-origin`,
       data: {
         type: 'donut',
         columns: [
@@ -132,6 +145,12 @@ class Finance extends Component {
           </div>
         </div>
         <div className="w-100 border-bottom my-2" />
+
+        <h2>Stats</h2>
+        <div id={`${committeeInfo.id}-stats`} />
+        <div className="w-100 border-bottom my-2" />
+
+
         <div className="row">
           <div className="col-12 col-md-6 text-left font-weight-bold">
             Total
@@ -223,7 +242,7 @@ class Finance extends Component {
         <div id={committeeInfo.id + '-usage'} />
         <div className="w-100 border-bottom my-2" />
         <h2>Origin</h2>
-        <div id={committeeInfo.id + '-total-from'} />
+        <div id={committeeInfo.id + '-origin'} />
         <div className="w-100 border-bottom my-2" />
 
         <a href={candidateInfo.fec_uri} target="_blank">
@@ -301,7 +320,7 @@ class Finance extends Component {
         <div id={candidateInfo.id + '-usage'} />
         <div className="w-100 border-bottom my-2" />
         <h2>Origin</h2>
-        <div id={candidateInfo.id + '-total-from'} />
+        <div id={candidateInfo.id + '-origin'} />
       </div>;
   }
 }

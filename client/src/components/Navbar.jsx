@@ -38,7 +38,7 @@ const Navbar = ({
         </li>
         <li className={'nav-item interactive ' + displayButton(config.candidateTwitter)}>
           <a
-            className={'nav-link text-primary border-primary border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'twitter')}
+            className={'nav-link text-primary border-primary border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'twitter-candidate')}
             onClick={() => queryTwitter(config.candidateTwitter, 'candidate')}
           >
             <i className="fab fa-twitter" />
@@ -46,7 +46,7 @@ const Navbar = ({
         </li>
         <li className={'nav-item interactive ' + displayButton(config.opponentTwitter)}>
           <a
-            className={'nav-link text-danger border-danger border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'twitter')}
+            className={'nav-link text-danger border-danger border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'twitter-opponent')}
             onClick={() => queryTwitter(config.opponentTwitter, 'opponent')}
           >
             <i className="fab fa-twitter" />
@@ -54,7 +54,7 @@ const Navbar = ({
         </li>
         <li className={'nav-item interactive ' + displayButton(config.candidateMemberId)}>
           <a
-            className={'nav-link text-primary border-primary border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'propublica')}
+            className={'nav-link text-primary border-primary border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'propublica-candidate')}
             onClick={() => queryPropublica(config.candidateMemberId, 'candidate')}
           >
             <i className="fas fa-gavel" />
@@ -62,7 +62,7 @@ const Navbar = ({
         </li>
         <li className={'nav-item interactive ' + displayButton(config.opponentMemberId)}>
           <a
-            className={'nav-link text-danger border-danger border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'propublica')}
+            className={'nav-link text-danger border-danger border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'propublica-opponent')}
             onClick={() => queryPropublica(config.opponentMemberId, 'opponent')}
           >
             <i className="fas fa-gavel" />

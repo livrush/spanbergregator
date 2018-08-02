@@ -39,7 +39,7 @@ const Navbar = ({
         <li className={'nav-item interactive ' + displayButton(config.candidateTwitter)}>
           <a
             className={'nav-link text-primary border-primary border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'twitter')}
-            onClick={() => queryTwitter(config.candidateTwitter)}
+            onClick={() => queryTwitter(config.candidateTwitter, 'candidate')}
           >
             <i className="fab fa-twitter" />
           </a>
@@ -47,7 +47,7 @@ const Navbar = ({
         <li className={'nav-item interactive ' + displayButton(config.opponentTwitter)}>
           <a
             className={'nav-link text-danger border-danger border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'twitter')}
-            onClick={() => queryTwitter(config.opponentTwitter)}
+            onClick={() => queryTwitter(config.opponentTwitter, 'opponent')}
           >
             <i className="fab fa-twitter" />
           </a>
@@ -55,7 +55,7 @@ const Navbar = ({
         <li className={'nav-item interactive ' + displayButton(config.candidateMemberId)}>
           <a
             className={'nav-link text-primary border-primary border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'propublica')}
-            onClick={queryPropublica}
+            onClick={() => queryPropublica(config.candidateMemberId, 'candidate')}
           >
             <i className="fas fa-gavel" />
           </a>
@@ -63,7 +63,7 @@ const Navbar = ({
         <li className={'nav-item interactive ' + displayButton(config.opponentMemberId)}>
           <a
             className={'nav-link text-danger border-danger border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'propublica')}
-            onClick={queryPropublica}
+            onClick={() => queryPropublica(config.opponentMemberId, 'opponent')}
           >
             <i className="fas fa-gavel" />
           </a>

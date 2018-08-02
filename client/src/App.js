@@ -35,14 +35,14 @@ class App extends Component {
     const { data } = this.state;
     if (display === 'loader') {
       return (<Loader></Loader>);
-    } else if (display === 'propublica') {
+    } else if (display.indexOf('propublica') > -1) {
       return (<VoteInfo votes={ data }></VoteInfo>);
-    } else if (display === 'twitter') {
+    } else if (display.indexOf('twitter') > -1) {
       return (<Tweets tweets={ data }></Tweets>);
-    } else if (display === 'finance') {
-      return (<Finances data={ data }></Finances>);
     } else if (display.indexOf('press') > -1) {
       return (<Articles articles={ data }></Articles>);
+    } else if (display === 'finance') {
+      return (<Finances data={ data }></Finances>);
     }
   }
 
@@ -52,16 +52,17 @@ class App extends Component {
     });
   }
 
-  queryPropublica() {
+  queryPropublica(query, type) {
     const app = this;
     app.showLoader();
+    const display = type ? 'propublica-' + type : 'propublica';
     axios({
       method: 'get',
-      url: `/propublica?id=${config.opponentMemberId}`,
+      url: `/propublica?id=${query}`,
     }).then(function ({ data }) {
       app.setState({
         data,
-        display: 'propublica',
+        display,
       });
     });
   }
@@ -96,16 +97,17 @@ class App extends Component {
     });
   }
 
-  queryTwitter(username) {
+  queryTwitter(username, type) {
     const app = this;
     app.showLoader();
+    const display = type ? 'twitter-' + type : 'twitter';
     axios({
       method: 'get',
       url: `/twitter/timeline?u=${username}`,
     }).then(function ({ data }) {
       app.setState({
         data,
-        display: 'twitter',
+        display,
       });
     });
   }

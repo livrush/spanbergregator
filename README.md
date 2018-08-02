@@ -91,11 +91,15 @@ export default {
 };
 ```
 
+### What is the member ID?
+
 You can find the member ID by [locating the representative here on congress.gov](https://www.congress.gov/help/field-values/member-bioguide-ids).
 
 **ONLY REPRESENTATIVES IN OFFICE WILL HAVE IDS**, as these are literally IDs for congress. If your candidate, or opponent, do not have an ID just leave the value an empty string, or `null`.
 
 ![Member ID Location](./assets/member-id-2.png)
+
+### What is the FEC ID?
 
 You can find the Federal Election Commission (FEC) ID by [searching for the representative here at fec.gov](https://www.fec.gov/) and grabbing it from their profile.
 

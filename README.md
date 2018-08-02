@@ -95,11 +95,11 @@ You can find the member ID by [locating the representative here on congress.gov]
 
 **ONLY REPRESENTATIVES IN OFFICE WILL HAVE IDS**, as these are literally IDs for congress. If your candidate, or opponent, do not have an ID just leave the value an empty string, or `null`.
 
-![Member ID Location](./member-id-2.png)
+![Member ID Location](./assets/member-id-2.png)
 
 You can find the Federal Election Commission (FEC) ID by [searching for the representative here at fec.gov](https://www.fec.gov/) and grabbing it from their profile.
 
-![FEC ID Location]('./assets/fec-id.png)
+![FEC ID Location](./assets/fec-id.png)
 
 ### Contribute
 

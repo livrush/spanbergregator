@@ -1,6 +1,6 @@
 export default {
   candidateName: 'Abigail Spanberger',
-  candidateTwitter: 'RepDaveBrat',
+  candidateTwitter: 'SpanbergerVA07',
   candidateMemberId: null,
   candidateFECId: 'H8VA07094',
   opponentName: 'Dave Brat',

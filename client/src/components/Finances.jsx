@@ -13,10 +13,10 @@ const Finances = ({ data }) => {
   <div className="card py-4">
     <div className="row">
       <div className="col-12 col-sm-6">
-        <Finance candidateInfo={candidate} committeeInfo={null}></Finance>
+        <Finance candidateInfo={candidate} committeeInfo={demCommittee}></Finance>
       </div>
       <div className="col-12 col-sm-6">
-        <Finance candidateInfo={opponent} committeeInfo={null}></Finance>
+        <Finance candidateInfo={opponent} committeeInfo={repCommittee}></Finance>
       </div>
     </div>
   </div>

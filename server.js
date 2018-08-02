@@ -57,8 +57,12 @@ app.get('/propublica', function (req, res) {
 });
 
 app.get('/propublica/finance', function (req, res) {
-  const candidateId = req.query.candidate;
-  const opponentId = req.query.opponent;
+  const {
+    candidate: candidateId,
+    opponent: opponentId,
+    candidateCommittee: candidateCommitteeId,
+    opponentCommittee: opponentCommitteeId,
+  } = req.query;
   const candidateInfo = axios({
     method: 'get',
     url: `https://api.propublica.org/campaign-finance/v1/2018/candidates/${candidateId}.json`,
@@ -73,11 +77,36 @@ app.get('/propublica/finance', function (req, res) {
       'x-api-key': PropublicaApiKey,
     },
   });
-  console.log('hello', candidateId, opponentId);
-  P.all([candidateInfo, opponentInfo])
-  .then(function ([candidate, opponent]) {
-    // console.log(typeof response);
-    res.send([candidate.data.results[0], opponent.data.results[0]]);
+  const candidateCommitteeInfo = axios({
+    method: 'get',
+    url: `https://api.propublica.org/campaign-finance/v1/2018/committees/${candidateCommitteeId}.json`,
+    headers: {
+      'x-api-key': PropublicaApiKey,
+    },
+  });
+  const opponentCommitteeInfo = axios({
+    method: 'get',
+    url: `https://api.propublica.org/campaign-finance/v1/2018/committees/${opponentCommitteeId}.json`,
+    headers: {
+      'x-api-key': PropublicaApiKey,
+    },
+  });
+  P.all([
+    candidateInfo,
+    opponentInfo,
+    candidateCommitteeInfo,
+    opponentCommitteeInfo,
+  ])
+  .then(function (response) {
+    // console.log(response);
+    const [candidate, opponent, candidateCommittee, opponentCommittee] = response;
+    console.log(candidate.data.results[0]);
+    res.send([
+      candidate.data.results[0],
+      opponent.data.results[0],
+      candidateCommittee.data.results[0],
+      opponentCommittee.data.results[0],
+    ]);
   });
 });
 

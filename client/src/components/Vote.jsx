@@ -2,7 +2,6 @@ import React from "react";
 import moment from "moment";
 
 const Vote = ({ vote }) => {
-  console.log(vote);
   const generateVote = function(position) {
     if (position === "Yes") {
       return (

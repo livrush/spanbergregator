@@ -58,7 +58,10 @@ class App extends Component {
     const display = type ? 'propublica-' + type : 'propublica';
     axios({
       method: 'get',
-      url: `/propublica?id=${query}`,
+      url: '/propublica',
+      params: {
+        id: query,
+      },
     }).then(function ({ data }) {
       app.setState({
         data,
@@ -94,7 +97,10 @@ class App extends Component {
     app.setState({ query });
     axios({
       method: 'get',
-      url: `/newsApi?q=${query}`,
+      url: '/newsApi',
+      params: {
+        q: query,
+      },
     }).then(function ({ data }) {
       app.setState({
         data,
@@ -109,7 +115,10 @@ class App extends Component {
     const display = type ? 'twitter-' + type : 'twitter';
     axios({
       method: 'get',
-      url: `/twitter/timeline?u=${username}`,
+      url: '/twitter/timeline',
+      params: {
+        u: username,
+      },
     }).then(function ({ data }) {
       app.setState({
         data,

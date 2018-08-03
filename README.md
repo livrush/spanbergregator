@@ -84,10 +84,12 @@ export default {
   candidateTwitter: '',
   candidateMemberId: '',
   candidateFECId: '',
+  candidateCommitteeFECId: '',
   opponentName: '',
   opponentTwitter: '',
   opponentMemberId: '',
   opponentFECId: '',
+  opponentCommitteeFECId: '',
 };
 ```
 
@@ -103,7 +105,13 @@ You can find the member ID by [locating the representative here on congress.gov]
 
 You can find the Federal Election Commission (FEC) ID by [searching for the representative here at fec.gov](https://www.fec.gov/) and grabbing it from their profile.
 
-![FEC ID Location](./assets/fec-id.png)
+![FEC ID Location](./assets/fec-candidate-id.png)
+
+### What is the committee FEC ID?
+
+You can find the FEC ID of your candidate/opponent's committee [by searching the same site](https://www.fec.gov/)! Just **make sure you get a committee**. The page will look _almost identical_ to the previous FEC page, but you will know based on what KIND of profile you are in!
+
+![FEC ID Location](./assets/fec-committee-id.png)
 
 ### Contribute
 

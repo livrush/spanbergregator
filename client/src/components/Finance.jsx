@@ -25,7 +25,6 @@ class Finance extends Component {
               committeeInfo.total_disbursements
           ],
           ['Available', committeeInfo.total_disbursements]
-          // ['Total Disbursements', committeeInfo.total_disbursements],
         ],
         colors: {
           Contributions: '#28a745',
@@ -185,10 +184,58 @@ class Finance extends Component {
           }
           color="success"
         />
+
+        <div className="w-100 border-bottom my-2" />
+
+        <FinanceRow
+          prefix="Total"
+          title="Receipts"
+          amount={committeeInfo.total_receipts}
+          color="success"
+        />
+        <FinanceRow
+          prefix="Total"
+          title="Refunds"
+          amount={committeeInfo.total_refunds}
+          color="danger"
+        />
+        <FinanceRow
+          prefix="Total"
+          title="Refunds to Individuals"
+          amount={committeeInfo.total_individual_refunds}
+          color="info"
+        />
+        <FinanceRow
+          prefix="Total"
+          title="Refunds to PACs"
+          amount={committeeInfo.total_pac_refunds}
+          color="warning"
+        />
+
+        <div className="w-100 border-bottom my-2" />
+
+        <FinanceRow
+          prefix="Total"
+          title="Individual Unitemized"
+          amount={committeeInfo.total_individual_unitemized}
+          color=""
+        />
+        <FinanceRow
+          prefix="Total"
+          title="Candidate Contributions"
+          amount={committeeInfo.total_candidate_contributions}
+          color=""
+        />
         <FinanceRow
           prefix=""
           title="Independent Expenditures"
           amount={committeeInfo.total_independent_expenditures}
+          color=""
+        />
+        <FinanceRow
+          prefix=""
+          title="Coordinated Expenditures"
+          amount={committeeInfo.total_coordinated_expenditures}
           color=""
         />
 

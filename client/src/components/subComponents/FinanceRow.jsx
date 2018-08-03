@@ -1,7 +1,7 @@
 import React from "react";
 
 const FinanceRow = ({
-  prefix,
+  prefix = '',
   title,
   amount,
   color = 'default',

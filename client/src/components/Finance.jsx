@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import bb from 'billboard.js';
+import FinanceRow from './subComponents/FinanceRow';
 
 class Finance extends Component {
   constructor() {
@@ -127,15 +128,13 @@ class Finance extends Component {
           {committeeInfo.name}
         </a>
         <div className="w-100 border-bottom my-2" />
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            Start{' '}
-            {moment(committeeInfo.date_coverage_from).format('MM/DD/YY')}:
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            ${sanitizeNumber(committeeInfo.begin_cash)}
-          </div>
-        </div>
+
+        <FinanceRow
+          prefix="Start"
+          title={moment(committeeInfo.date_coverage_from).format('MM/DD/YY')}
+          amount={committeeInfo.begin_cash}
+          color={null}
+        ></FinanceRow>
         <div className="row">
           <div className="col-12 col-md-6 text-left font-weight-bold">
             End {moment(committeeInfo.date_coverage_to).format('MM/DD/YY')}:

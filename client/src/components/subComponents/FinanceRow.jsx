@@ -12,7 +12,7 @@ const FinanceRow = ({
         <span className={`text-${color}`}>{title}</span>:
       </div>
       <div className="col-12 col-md-6 text-right">
-        $<span className={`text-${color}`}>{sanitizeNumber(amount)}</span>:
+        $<span className={`text-${color}`}>{sanitizeNumber(amount)}</span>
       </div>
     </div>;
 };

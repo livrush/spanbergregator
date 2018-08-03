@@ -19,8 +19,12 @@ class Finance extends Component {
           ['Contributions', committeeInfo.total_contributions],
           ['Individuals', committeeInfo.total_from_individuals],
           ['PACs', committeeInfo.total_from_pacs],
-          ['Disbursements', committeeInfo.total_contributions - committeeInfo.total_disbursements],
-          ['Available', committeeInfo.total_disbursements],
+          [
+            'Disbursements',
+            committeeInfo.total_contributions -
+              committeeInfo.total_disbursements
+          ],
+          ['Available', committeeInfo.total_disbursements]
           // ['Total Disbursements', committeeInfo.total_disbursements],
         ],
         colors: {
@@ -28,7 +32,7 @@ class Finance extends Component {
           Individuals: '#17a2b8',
           PACs: '#ffc107',
           Disbursements: '#dc3545',
-          Available: '#28a745',
+          Available: '#28a745'
         }
       },
       interaction: {
@@ -123,7 +127,8 @@ class Finance extends Component {
     console.log(candidateInfo);
     console.log(committeeInfo);
 
-    return <div className="container">
+    return (
+      <div className="container">
         <a href={committeeInfo.fec_uri} target="_blank">
           {committeeInfo.name}
         </a>
@@ -134,107 +139,59 @@ class Finance extends Component {
           title={moment(committeeInfo.date_coverage_from).format('MM/DD/YY')}
           amount={committeeInfo.begin_cash}
           color={null}
-        ></FinanceRow>
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            End {moment(committeeInfo.date_coverage_to).format('MM/DD/YY')}:
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            ${sanitizeNumber(committeeInfo.end_cash)}
-          </div>
-        </div>
+        />
+        <FinanceRow
+          prefix="End"
+          title={moment(committeeInfo.date_coverage_to).format('MM/DD/YY')}
+          amount={committeeInfo.end_cash}
+          color={null}
+        />
         <div className="w-100 border-bottom my-2" />
 
         <h2>Stats</h2>
         <div id={`${committeeInfo.id}-stats`} />
         <div className="w-100 border-bottom my-2" />
 
+        <FinanceRow
+          prefix="Total"
+          title="Contributions"
+          amount={committeeInfo.total_contributions}
+          color="success"
+        />
+        <FinanceRow
+          prefix="Total"
+          title="From Individuals"
+          amount={committeeInfo.total_from_individuals}
+          color="info"
+        />
+        <FinanceRow
+          prefix="Total"
+          title="From PACs"
+          amount={committeeInfo.total_from_pacs}
+          color="warning"
+        />
+        <FinanceRow
+          prefix="Total"
+          title="Disbursements"
+          amount={committeeInfo.total_disbursements}
+          color="danger"
+        />
+        <FinanceRow
+          prefix="Total"
+          title="Available"
+          amount={
+            committeeInfo.total_contributions -
+            committeeInfo.total_disbursements
+          }
+          color="success"
+        />
+        <FinanceRow
+          prefix=""
+          title="Independent Expenditures"
+          amount={committeeInfo.total_independent_expenditures}
+          color=""
+        />
 
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            Total
-            <span className="text-success font-weight-bold">
-              {' '}
-              Contributions:
-            </span>
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            <span className="text-success">
-              ${sanitizeNumber(committeeInfo.total_contributions)}
-            </span>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            Total
-            <span className="text-info font-weight-bold">
-              {' '}
-              From Individuals:
-            </span>
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            <span className="text-info">
-              ${sanitizeNumber(committeeInfo.total_from_individuals)}
-            </span>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            Total
-            <span className="text-warning font-weight-bold">
-              {' '}
-              From PACs:
-            </span>
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            <span className="text-warning">
-              ${sanitizeNumber(committeeInfo.total_from_pacs)}
-            </span>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            Total
-            <span className="text-danger font-weight-bold">
-              {' '}
-              Disbursements:
-            </span>
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            <span className="text-danger">
-              ${sanitizeNumber(committeeInfo.total_disbursements)}
-            </span>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            Total
-            <span className="text-success font-weight-bold">
-              {' '}
-              Available:
-            </span>
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            <span className="text-success">
-              ${sanitizeNumber(
-                committeeInfo.total_contributions -
-                  committeeInfo.total_disbursements
-              )}
-            </span>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            Independent Expenditures:
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            <span className="text-default">
-              ${sanitizeNumber(
-                committeeInfo.total_independent_expenditures
-              )}
-            </span>
-          </div>
-        </div>
         <div className="w-100 border-bottom my-2" />
 
         <h2>Usage</h2>
@@ -248,71 +205,59 @@ class Finance extends Component {
           {candidateInfo.name}
         </a>
         <div className="w-100 border-bottom my-2" />
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            Begin{' '}
-            {moment(candidateInfo.date_coverage_from).format('MM/DD/YY')}:
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            ${sanitizeNumber(candidateInfo.begin_cash)}
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            End {moment(candidateInfo.date_coverage_to).format('MM/DD/YY')}:
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            ${sanitizeNumber(candidateInfo.end_cash)}
-          </div>
-        </div>
+
+        <FinanceRow
+          prefix="Begin"
+          title={moment(candidateInfo.date_coverage_from).format('MM/DD/YY')}
+          amount={candidateInfo.begin_cash}
+          color={null}
+        />
+        <FinanceRow
+          prefix="End"
+          title={moment(candidateInfo.date_coverage_to).format('MM/DD/YY')}
+          amount={candidateInfo.end_cash}
+          color={null}
+        />
+
         <div className="w-100 border-bottom my-2" />
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            Total
-            <span className="text-success font-weight-bold">
-              {' '}
-              Contributions:
-            </span>
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            ${sanitizeNumber(candidateInfo.total_contributions)}
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            Total
-            <span className="text-danger font-weight-bold">
-              {' '}
-              Disbursements:
-            </span>
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            ${sanitizeNumber(candidateInfo.total_disbursements)}
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            Total
-            <span className="text-success font-weight-bold">
-              {' '}
-              Available:
-            </span>
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            ${sanitizeNumber(
-              candidateInfo.total_contributions -
-                candidateInfo.total_disbursements
-            )}
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-md-6 text-left font-weight-bold">
-            Independent Expenditures:
-          </div>
-          <div className="col-12 col-md-6 text-right">
-            ${sanitizeNumber(candidateInfo.independent_expenditures)}
-          </div>
-        </div>
+
+        <FinanceRow
+          prefix="Total"
+          title="Contributions"
+          amount={candidateInfo.total_contributions}
+          color="success"
+        />
+        <FinanceRow
+          prefix="Total"
+          title="From Individuals"
+          amount={candidateInfo.total_from_individuals}
+          color="info"
+        />
+        <FinanceRow
+          prefix="Total"
+          title="From PACs"
+          amount={candidateInfo.total_from_pacs}
+          color="warning"
+        />
+        <FinanceRow
+          prefix="Total"
+          title="Disbursements"
+          amount={candidateInfo.total_disbursements}
+          color="danger"
+        />
+        <FinanceRow
+          prefix="Total"
+          title="Available"
+          amount={
+            candidateInfo.total_contributions -
+            candidateInfo.total_disbursements
+          }
+          color="success"
+        />
+        <FinanceRow
+          title="Independent Expenditures"
+          amount={candidateInfo.independent_expenditures}
+        />
         <div className="w-100 border-bottom my-2" />
 
         <h2>Usage</h2>
@@ -320,7 +265,8 @@ class Finance extends Component {
         <div className="w-100 border-bottom my-2" />
         <h2>Origin</h2>
         <div id={candidateInfo.id + '-origin'} />
-      </div>;
+      </div>
+    );
   }
 }
 

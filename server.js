@@ -25,7 +25,11 @@ const twitter = new twitterAPI({
   consumerSecret: TwitterConsumerSecret,
 });
 
+const staticFiles = express.static(path.join(__dirname, '../client/build'))
+
 const app = express();
+
+app.use(staticFiles)
 
 app.use(express.static(path.join(__dirname, '/client')));
 
@@ -142,5 +146,7 @@ app.get('/twitter/timeline', function (req, res) {
     }
   );
 });
+
+app.use('/*', staticFiles);
 
 app.listen(PORT, () => console.warn(`Listening on http://localhost:${PORT}`));

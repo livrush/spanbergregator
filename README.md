@@ -2,29 +2,48 @@
 
 ![Screenshot](./assets/preview.png)
 
-A simple info aggregator for VA-07 campaign. What it does:
+- [Spanbergregator](#spanbergregator)
+  * [To use:](#to-use-)
+    + [Clone this repo](#clone-this-repo)
+    + [Install dependencies](#install-dependencies)
+    + [Add environmental variables](#add-environmental-variables)
+    + [Add configs for your campaign](#add-configs-for-your-campaign)
+      + [What is the member ID?](#what-is-the-member-id-)
+      + [What is the FEC ID?](#what-is-the-fec-id-)
+      + [What is the committee FEC ID?](#what-is-the-committee-fec-id-)
+  * [Deploy](#deploy)
+  * [Contribute](#contribute)
+
+## About
+
+A simple info aggregator for VA-07 campaign. It was built to be flexible and accessible for any campaign.
+
+What it does:
 
 * Collects and displays news articles from **NewsApi** about candidate and opponent
 * Collects and displays news articles from **NewsApi** about user input query
-* Collects and displays tweets from opponent's **Twitter** account
+* Collects and displays tweets from each candidate's **Twitter** account
   * Highlights retweets in green
   * Highlights quote replies in yellow
   * Highlights replies in red
   * Highlights self-replies in grey
-* Collect and display info from **Propublica** about opponent's vote history
+* Collect and display info from **Propublica** about any (currently in Congress) candidate's vote history
   * My campaign is not for an incumbent, so it may be worth adjusting this so the votes are not automatically taken from opponent's page on Propublica
+* Collect and display info from **Propublica** about both candidates' financial disclosures
 
-Created with `create-react-app`
+## Techstack
 
-Styled with `Bootstrap`, `Font-Awesome`
+* Created with `create-react-app`
+* Styled with `Bootstrap`, `Font-Awesome`
+* Using simple `node/express` proxy server for API calls
 
-## To use:
+## Usage
 
 ### Clone this repo
 
 ```
-$ git clone git@gitlab.com:digidems/spanbergregator.git
-$ cd spanbergregator
+git clone git@gitlab.com:digidems/spanbergregator.git
+cd spanbergregator
 ```
 
 ### Install dependencies
@@ -32,10 +51,10 @@ $ cd spanbergregator
 For development purposes this project uses a proxy server, so there are two directories in which you will need to install dependencies, the `root` and `client`.
 
 ```
-$ npm i
-$ cd client
-$ npm i
-$ cd ..
+npm i
+cd client
+npm i
+cd ..
 ```
 
 ### Add environmental variables
@@ -93,7 +112,7 @@ export default {
 };
 ```
 
-### What is the member ID?
+#### What is the member ID?
 
 You can find the member ID by [locating the representative here on congress.gov](https://www.congress.gov/help/field-values/member-bioguide-ids).
 
@@ -101,22 +120,41 @@ You can find the member ID by [locating the representative here on congress.gov]
 
 ![Member ID Location](./assets/member-id-2.png)
 
-### What is the FEC ID?
+#### What is the FEC ID?
 
 You can find the Federal Election Commission (FEC) ID by [searching for the representative here at fec.gov](https://www.fec.gov/) and grabbing it from their profile.
 
 ![FEC ID Location](./assets/fec-candidate-id.png)
 
-### What is the committee FEC ID?
+#### What is the committee FEC ID?
 
 You can find the FEC ID of your candidate/opponent's committee [by searching the same site](https://www.fec.gov/)! Just **make sure you get a committee**. The page will look _almost identical_ to the previous FEC page, but you will know based on what KIND of profile you are in!
 
 ![FEC ID Location](./assets/fec-committee-id.png)
 
-### Contribute
+## Deploy
+
+Deploying the aggregator is as simple as pushing once you have a [Heroku](https://www.heroku.com) account. First you must login to Heroku on the command line. Make sure you have [installed the Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+
+```
+heroku login
+```
+
+Once you are logged into Heroku in your terminal, from the root of this repo you should initialize a new Heroku app.
+
+```
+heroku create <whatever you want to name your app>
+```
+
+Finally, you just have to push up your code to Heroku. Creating an app will have added a heroku remote to this directory, so every time you make updates all you have to do is commit them and enter this script:
+
+```
+git push heroku master
+```
+
+## Contribute
 
 My wishlist:
 
 * Cache data from API calls to reduce call count
 * Group articles that are posted to multiple sources
-* Swap votes when candidate is incumbent/challenger

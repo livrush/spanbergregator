@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "scripts": {
     "clean": "concurrently \"rimraf node_modules\" \"cd client && rimraf node_modules build\"",
-    "heroku-postbuild": "npm install",
-    "postinstall": "npm --prefix ./client install",
+    "heroku-postbuild": "npm install && npm --prefix ./client install",
+    "postinstall": "npm run build",
     "start": "concurrently --kill-others-on-fail \"nodemon server.js\" \"cd client && npm start\"",
     "build": "concurrently --kill-others-on-fail \"npm run build:server\" \"npm run build:client\"",
     "build:client": "cd client && npm run build",

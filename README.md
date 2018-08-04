@@ -3,16 +3,23 @@
 ![Screenshot](./assets/preview.png)
 
 - [Spanbergregator](#spanbergregator)
-  * [To use:](#to-use-)
+  * [About](#about)
+  * [Techstack](#techstack)
+  * [Usage](#usage)
     + [Clone this repo](#clone-this-repo)
     + [Install dependencies](#install-dependencies)
     + [Add environmental variables](#add-environmental-variables)
     + [Add configs for your campaign](#add-configs-for-your-campaign)
-      + [What is the member ID?](#what-is-the-member-id-)
-      + [What is the FEC ID?](#what-is-the-fec-id-)
-      + [What is the committee FEC ID?](#what-is-the-committee-fec-id-)
+      - [What is the member ID?](#what-is-the-member-id-)
+      - [What is the FEC ID?](#what-is-the-fec-id-)
+      - [What is the committee FEC ID?](#what-is-the-committee-fec-id-)
+    + [Run locally](#run-locally)
   * [Deploy](#deploy)
+    + [Log in to Heroku](#log-in-to-heroku)
+    + [Create a Heroku app](#create-a-heroku-app)
+    + [Push up changes](#push-up-changes)
   * [Contribute](#contribute)
+
 
 ## About
 
@@ -132,25 +139,57 @@ You can find the FEC ID of your candidate/opponent's committee [by searching the
 
 ![FEC ID Location](./assets/fec-committee-id.png)
 
+### Run locally
+
+To run locally just run
+
+```
+npm install && start
+```
+
 ## Deploy
 
-Deploying the aggregator is as simple as pushing once you have a [Heroku](https://www.heroku.com) account. First you must login to Heroku on the command line. Make sure you have [installed the Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+Deploying the aggregator is as simple as pushing once you have a [Heroku](https://www.heroku.com) account.
+
+### Log in to Heroku
+
+First you must login to Heroku on the command line. Make sure you have [installed the Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 
 ```
 heroku login
 ```
 
+### Create a Heroku app
+
 Once you are logged into Heroku in your terminal, from the root of this repo you should initialize a new Heroku app.
 
+Replace `<name>` with whatever you want to name your app. Don't worry, you can change this later!
+
 ```
-heroku create <whatever you want to name your app>
+heroku create <name>
 ```
 
-Finally, you just have to push up your code to Heroku. Creating an app will have added a heroku remote to this directory, so every time you make updates all you have to do is commit them and enter this script:
+### Add environmental variables
+
+The `.env` file we created earlier is great for use locally. Once we decide to deploy, we must transfer those keys to Heroku. If you are good with a command line, you can [see how to do that here](https://devcenter.heroku.com/articles/getting-started-with-nodejs#define-config-vars). Otherwise there is a GUI you can use on [Heroku.com](https://www.heroku.com).
+
+* Select your app (should have been created when you ran heroku create)
+* Go to settings
+* Add your environmental variables
+
+You can even change the name of your app here, if you like.
+
+![Setting Heroku preferencecs](./assets/heroku-env-vars.png)
+
+### Push up changes
+
+Finally, you just have to push up your code to Heroku. Creating an app will have added a `heroku` remote to this directory, so every time you make updates all you have to do is commit them and enter this script:
 
 ```
 git push heroku master
 ```
+
+The build process is already set up, so once the build finishes you should have a live aggregator!
 
 ## Contribute
 

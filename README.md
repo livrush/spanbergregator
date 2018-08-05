@@ -106,16 +106,16 @@ Store in:
 
 ```javascript
 export default {
-  candidateName: '',
-  candidateTwitter: '',
-  candidateMemberId: '',
-  candidateFECId: '',
-  candidateCommitteeFECId: '',
-  opponentName: '',
-  opponentTwitter: '',
-  opponentMemberId: '',
-  opponentFECId: '',
-  opponentCommitteeFECId: '',
+  demName: '',
+  demTwitter: '',
+  demMemberId: '',
+  demFECId: '',
+  demCommitteeFECId: '',
+  repName: '',
+  repTwitter: '',
+  repMemberId: '',
+  repFECId: '',
+  repCommitteeFECId: '',
 };
 ```
 

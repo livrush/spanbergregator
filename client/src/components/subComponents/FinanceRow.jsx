@@ -20,6 +20,7 @@ const FinanceRow = ({
 export default FinanceRow;
 
 const sanitizeNumber = x => {
+  if (typeof x !== 'number') debugger;
   var parts = x
     .toFixed(2)
     .toString()

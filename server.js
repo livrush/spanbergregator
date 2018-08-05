@@ -62,52 +62,52 @@ app.get('/propublica', function (req, res) {
 
 app.get('/propublica/finance', function (req, res) {
   const {
-    candidate: candidateId,
-    opponent: opponentId,
-    candidateCommittee: candidateCommitteeId,
-    opponentCommittee: opponentCommitteeId,
+    dem: demId,
+    rep: repId,
+    demCommittee: demCommitteeId,
+    repCommittee: repCommitteeId,
   } = req.query;
-  const candidateInfo = axios({
+  const demInfo = axios({
     method: 'get',
-    url: `https://api.propublica.org/campaign-finance/v1/2018/candidates/${candidateId}.json`,
+    url: `https://api.propublica.org/campaign-finance/v1/2018/candidates/${demId}.json`,
     headers: {
       'x-api-key': PropublicaApiKey,
     },
   });
-  const opponentInfo = axios({
+  const repInfo = axios({
     method: 'get',
-    url: `https://api.propublica.org/campaign-finance/v1/2018/candidates/${opponentId}.json`,
+    url: `https://api.propublica.org/campaign-finance/v1/2018/candidates/${repId}.json`,
     headers: {
       'x-api-key': PropublicaApiKey,
     },
   });
-  const candidateCommitteeInfo = axios({
+  const demCommitteeInfo = axios({
     method: 'get',
-    url: `https://api.propublica.org/campaign-finance/v1/2018/committees/${candidateCommitteeId}.json`,
+    url: `https://api.propublica.org/campaign-finance/v1/2018/committees/${demCommitteeId}.json`,
     headers: {
       'x-api-key': PropublicaApiKey,
     },
   });
-  const opponentCommitteeInfo = axios({
+  const repCommitteeInfo = axios({
     method: 'get',
-    url: `https://api.propublica.org/campaign-finance/v1/2018/committees/${opponentCommitteeId}.json`,
+    url: `https://api.propublica.org/campaign-finance/v1/2018/committees/${repCommitteeId}.json`,
     headers: {
       'x-api-key': PropublicaApiKey,
     },
   });
   P.all([
-    candidateInfo,
-    opponentInfo,
-    candidateCommitteeInfo,
-    opponentCommitteeInfo,
+    demInfo,
+    repInfo,
+    demCommitteeInfo,
+    repCommitteeInfo,
   ])
   .then(function (response) {
-    const [candidate, opponent, candidateCommittee, opponentCommittee] = response;
+    const [dem, rep, demCommittee, repCommittee] = response;
     res.send([
-      candidate.data.results[0],
-      opponent.data.results[0],
-      candidateCommittee.data.results[0],
-      opponentCommittee.data.results[0],
+      dem.data.results[0],
+      rep.data.results[0],
+      demCommittee.data.results[0],
+      repCommittee.data.results[0],
     ]);
   });
 });

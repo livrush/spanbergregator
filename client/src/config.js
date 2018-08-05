@@ -1,12 +1,12 @@
 export default {
-  candidateName: 'Abigail Spanberger',
-  candidateTwitter: 'SpanbergerVA07',
-  candidateMemberId: null,
-  candidateFECId: 'H8VA07094',
-  candidateCommitteeFECId: 'C00649913',
-  opponentName: 'Dave Brat',
-  opponentTwitter: 'RepDaveBrat',
-  opponentMemberId: 'B001290',
-  opponentFECId: 'H4VA07143',
-  opponentCommitteeFECId: 'C00554949'
+  demName: 'Abigail Spanberger',
+  demTwitter: 'SpanbergerVA07',
+  demMemberId: null,
+  demFECId: 'H8VA07094',
+  demCommitteeFECId: 'C00649913',
+  repName: 'Dave Brat',
+  repTwitter: 'RepDaveBrat',
+  repMemberId: 'B001290',
+  repFECId: 'H4VA07143',
+  repCommitteeFECId: 'C00554949'
 };

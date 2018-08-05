@@ -15,7 +15,7 @@ class App extends Component {
     this.state = {
       config: config,
       data: [],
-      query: config.candidateName,
+      query: config.demName,
       display: 'loader',
     };
     this.queryPress = this.queryPress.bind(this);
@@ -29,7 +29,7 @@ class App extends Component {
 
   componentDidMount() {
     const { query } = this.state;
-    this.updateDisplay('Press', config.candidateName, config.candidateName);
+    this.updateDisplay('Press', config.demName, config.demName);
   }
 
   showLoader() {
@@ -65,10 +65,10 @@ class App extends Component {
       method: 'get',
       url: '/propublica/finance',
       params: {
-        candidate: config.candidateFECId,
-        opponent: config.opponentFECId,
-        candidateCommittee: config.candidateCommitteeFECId,
-        opponentCommittee: config.opponentCommitteeFECId,
+        dem: config.demFECId,
+        rep: config.repFECId,
+        demCommittee: config.demCommitteeFECId,
+        repCommittee: config.repCommitteeFECId,
       },
     });
   }

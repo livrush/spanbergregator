@@ -19,11 +19,11 @@ const Navbar = ({
         <NavTab
           displayType="Press"
           showTab={showTab}
-          showCriteria={[config.candidateName]}
+          showCriteria={[config.demName]}
           setActiveTab={setActiveTab}
           display={display}
           updateDisplay={updateDisplay}
-          query={config.candidateName}
+          query={config.demName}
           icon="fas fa-newspaper"
           color="primary"
           partyType="DEM"
@@ -32,11 +32,11 @@ const Navbar = ({
         <NavTab
           displayType="Press"
           showTab={showTab}
-          showCriteria={[config.opponentName]}
+          showCriteria={[config.repName]}
           setActiveTab={setActiveTab}
           display={display}
           updateDisplay={updateDisplay}
-          query={config.opponentName}
+          query={config.repName}
           icon="fas fa-newspaper"
           color="danger"
           partyType="REP"
@@ -45,11 +45,11 @@ const Navbar = ({
         <NavTab
           displayType="Twitter"
           showTab={showTab}
-          showCriteria={[config.candidateTwitter]}
+          showCriteria={[config.demTwitter]}
           setActiveTab={setActiveTab}
           display={display}
           updateDisplay={updateDisplay}
-          query={config.candidateTwitter}
+          query={config.demTwitter}
           icon="fab fa-twitter"
           color="primary"
           partyType="DEM"
@@ -58,11 +58,11 @@ const Navbar = ({
         <NavTab
           displayType="Twitter"
           showTab={showTab}
-          showCriteria={[config.opponentTwitter]}
+          showCriteria={[config.repTwitter]}
           setActiveTab={setActiveTab}
           display={display}
           updateDisplay={updateDisplay}
-          query={config.opponentTwitter}
+          query={config.repTwitter}
           icon="fab fa-twitter"
           color="danger"
           partyType="REP"
@@ -72,11 +72,11 @@ const Navbar = ({
         <NavTab
           displayType="Propublica"
           showTab={showTab}
-          showCriteria={[config.candidateMemberId]}
+          showCriteria={[config.demMemberId]}
           setActiveTab={setActiveTab}
           display={display}
           updateDisplay={updateDisplay}
-          query={config.candidateMemberId}
+          query={config.demMemberId}
           icon="fas fa-gavel"
           color="primary"
           partyType="DEM"
@@ -85,11 +85,11 @@ const Navbar = ({
         <NavTab
           displayType="Propublica"
           showTab={showTab}
-          showCriteria={[config.opponentMemberId]}
+          showCriteria={[config.repMemberId]}
           setActiveTab={setActiveTab}
           display={display}
           updateDisplay={updateDisplay}
-          query={config.opponentMemberId}
+          query={config.repMemberId}
           icon="fas fa-gavel"
           color="danger"
           partyType="REP"
@@ -100,10 +100,10 @@ const Navbar = ({
           displayType="Finance"
           showTab={showTab}
           showCriteria={[
-            config.candidateFECId,
-            config.opponentFECId,
-            config.candidateCommitteeFECId,
-            config.opponentFECId,
+            config.demFECId,
+            config.repFECId,
+            config.demCommitteeFECId,
+            config.repFECId,
           ]}
           setActiveTab={setActiveTab}
           display={display}

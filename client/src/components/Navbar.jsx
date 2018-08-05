@@ -103,7 +103,7 @@ const Navbar = ({
             config.demFECId,
             config.repFECId,
             config.demCommitteeFECId,
-            config.repFECId,
+            config.repCommitteeFECId,
           ]}
           setActiveTab={setActiveTab}
           display={display}

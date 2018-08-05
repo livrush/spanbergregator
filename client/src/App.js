@@ -148,11 +148,7 @@ class App extends Component {
             config={this.state.config}
             display={this.state.display}
             updateDisplay={this.updateDisplay}
-            queryPress={this.queryPress}
-            queryFinance={this.queryFinance}
-            queryTwitter={this.queryTwitter}
-            queryPropublica={this.queryPropublica}
-        ></Navbar>
+          ></Navbar>
 
           <div className="content">
             { this.displayContent(this.state.display) }

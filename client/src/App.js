@@ -133,7 +133,7 @@ class App extends Component {
             <div className="input-group-append">
               <button
                 className="btn btn-primary"
-                onClick={() => this.queryPress(this.state.query)}
+                onClick={() => this.updateDisplay('Press', '*', this.state.query)}
                 type="submit"
             >
                 Search

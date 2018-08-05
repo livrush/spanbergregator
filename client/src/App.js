@@ -13,6 +13,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      config: config,
       data: [],
       query: config.candidateName,
       display: 'loader',
@@ -46,32 +47,22 @@ class App extends Component {
     .then(function ({ data }) {
       app.setState({
         data,
-        display: `${display.toLowerCase()}-${party}`,
+        display: `${display}-${party}`,
       });
     });
   }
 
-  queryPropublica(query, type) {
-    const app = this;
-    app.showLoader();
-    const display = type ? 'propublica-' + type : 'propublica';
+  queryPropublica(query) {
     return axios({
       method: 'get',
       url: '/propublica',
       params: {
         id: query,
       },
-    // }).then(function ({ data }) {
-    //   app.setState({
-    //     data,
-    //     display,
-    //   });
     });
   }
 
   queryFinance() {
-    const app = this;
-    app.showLoader();
     return axios({
       method: 'get',
       url: '/propublica/finance',
@@ -81,48 +72,26 @@ class App extends Component {
         candidateCommittee: config.candidateCommitteeFECId,
         opponentCommittee: config.opponentCommitteeFECId,
       },
-    // }).then(function ({ data }) {
-    //   app.setState({
-    //     data,
-    //     display: 'finance',
-    //   });
     });
   }
 
-  queryPress(query, type) {
-    const app = this;
-    app.showLoader();
-    const display = type ? 'press-' + type : 'press';
-    app.setState({ query });
+  queryPress(query) {
     return axios({
       method: 'get',
       url: '/newsApi',
       params: {
         q: query,
       },
-    // }).then(function ({ data }) {
-    //   app.setState({
-    //     data,
-    //     display,
-    //   });
     });
   }
 
-  queryTwitter(username, type) {
-    const app = this;
-    app.showLoader();
-    const display = type ? 'twitter-' + type : 'twitter';
+  queryTwitter(username) {
     return axios({
       method: 'get',
       url: '/twitter/timeline',
       params: {
         u: username,
       },
-    // }).then(function ({ data }) {
-    //   app.setState({
-    //     data,
-    //     display,
-    //   });
     });
   }
 
@@ -136,13 +105,13 @@ class App extends Component {
     const { data } = this.state;
     if (display === 'loader') {
       return (<Loader></Loader>);
-    } else if (display.indexOf('propublica') > -1) {
+    } else if (display.indexOf('Propublica') > -1) {
       return (<VoteInfo votes={ data }></VoteInfo>);
-    } else if (display.indexOf('twitter') > -1) {
+    } else if (display.indexOf('Twitter') > -1) {
       return (<Tweets tweets={ data }></Tweets>);
-    } else if (display.indexOf('press') > -1) {
+    } else if (display.indexOf('Press') > -1) {
       return (<Articles articles={ data }></Articles>);
-    } else if (display.indexOf('finance') > -1) {
+    } else if (display.indexOf('Finance') > -1) {
       return (<Finances data={ data }></Finances>);
     }
   }
@@ -176,6 +145,7 @@ class App extends Component {
 
         <main className="container">
           <Navbar
+            config={this.state.config}
             display={this.state.display}
             updateDisplay={this.updateDisplay}
             queryPress={this.queryPress}

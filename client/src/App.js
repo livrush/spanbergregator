@@ -29,7 +29,7 @@ class App extends Component {
 
   componentDidMount() {
     const { query } = this.state;
-    this.updateDisplay('Press', config.demName, config.demName);
+    this.updateDisplay('Press', 'DEM', config.demName);
   }
 
   showLoader() {
@@ -39,6 +39,7 @@ class App extends Component {
   }
 
   updateDisplay(display, party, query) {
+    if (this.state.display === `${display}-${party}`) return null;
     const app = this;
     app.showLoader();
     this['query' + display](query)

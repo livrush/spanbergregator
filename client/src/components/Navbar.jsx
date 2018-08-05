@@ -1,81 +1,119 @@
 import React from "react";
-import config from "../config";
-
 import _ from 'lodash';
 
+import NavTab from './subComponents/NavTab';
+
 const Navbar = ({
+  config,
   display,
   updateDisplay,
-  queryPress,
-  queryTwitter,
-  queryPropublica,
-  queryPropublicaFinance
 }) => {
-  const validateActiveButton = (display, displayInstance) => {
+  const showTab = (args) => _.every(args) ? '' : 'd-none';
+  const setActiveTab = (display, displayInstance) => {
     if (display === displayInstance) return " active-media";
     return "";
   };
 
-  const displayButton = (...args) => _.every(args) ? '' : 'd-none';
-
   return <div className="container">
       <ul className="nav nav-tabs border-bottom-0">
-        <li className={'nav-item interactive ' + displayButton(config.candidateName)}>
-          <a
-            className={'nav-link text-primary border-primary border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'press-candidate')}
-            onClick={() => updateDisplay('Press', config.candidateName, config.candidateName)}
-            >
-            <i className="fas fa-newspaper" />
-          </a>
-        </li>
-        <li className={'nav-item interactive ' + displayButton(config.opponentName)}>
-          <a
-            className={'nav-link text-danger border-danger border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'press-opponent')}
-            onClick={() => updateDisplay('Press', config.opponentName, config.opponentName)}
-          >
-            <i className="fas fa-newspaper" />
-          </a>
-        </li>
-        <li className={'nav-item interactive ' + displayButton(config.candidateTwitter)}>
-          <a
-            className={'nav-link text-primary border-primary border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'twitter-candidate')}
-            onClick={() => queryTwitter(config.candidateTwitter, 'candidate')}
-          >
-            <i className="fab fa-twitter" />
-          </a>
-        </li>
-        <li className={'nav-item interactive ' + displayButton(config.opponentTwitter)}>
-          <a
-            className={'nav-link text-danger border-danger border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'twitter-opponent')}
-            onClick={() => queryTwitter(config.opponentTwitter, 'opponent')}
-          >
-            <i className="fab fa-twitter" />
-          </a>
-        </li>
-        <li className={'nav-item interactive ' + displayButton(config.candidateMemberId)}>
-          <a
-            className={'nav-link text-primary border-primary border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'propublica-candidate')}
-            onClick={() => queryPropublica(config.candidateMemberId, 'candidate')}
-          >
-            <i className="fas fa-gavel" />
-          </a>
-        </li>
-        <li className={'nav-item interactive ' + displayButton(config.opponentMemberId)}>
-          <a
-            className={'nav-link text-danger border-danger border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'propublica-opponent')}
-            onClick={() => queryPropublica(config.opponentMemberId, 'opponent')}
-          >
-            <i className="fas fa-gavel" />
-          </a>
-        </li>
-        <li className={'nav-item interactive ' + displayButton(config.candidateFECId, config.opponentFECId)}>
-          <a
-            className={'nav-link text-secondary border-secondary border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'finance')}
-            onClick={queryPropublicaFinance}
-          >
-            <i className="fas fa-dollar-sign" />
-          </a>
-        </li>
+        <NavTab
+          displayType="Press"
+          showTab={showTab}
+          showCriteria={[config.candidateName]}
+          setActiveTab={setActiveTab}
+          display={display}
+          updateDisplay={updateDisplay}
+          query={config.candidateName}
+          icon="fas fa-newspaper"
+          color="primary"
+          partyType="DEM"
+        >
+        </NavTab>
+        <NavTab
+          displayType="Press"
+          showTab={showTab}
+          showCriteria={[config.opponentName]}
+          setActiveTab={setActiveTab}
+          display={display}
+          updateDisplay={updateDisplay}
+          query={config.opponentName}
+          icon="fas fa-newspaper"
+          color="danger"
+          partyType="REP"
+        >
+        </NavTab>
+        <NavTab
+          displayType="Twitter"
+          showTab={showTab}
+          showCriteria={[config.candidateTwitter]}
+          setActiveTab={setActiveTab}
+          display={display}
+          updateDisplay={updateDisplay}
+          query={config.candidateTwitter}
+          icon="fab fa-twitter"
+          color="primary"
+          partyType="DEM"
+        >
+        </NavTab>
+        <NavTab
+          displayType="Twitter"
+          showTab={showTab}
+          showCriteria={[config.opponentTwitter]}
+          setActiveTab={setActiveTab}
+          display={display}
+          updateDisplay={updateDisplay}
+          query={config.opponentTwitter}
+          icon="fab fa-twitter"
+          color="danger"
+          partyType="REP"
+        >
+        </NavTab>
+
+        <NavTab
+          displayType="Propublica"
+          showTab={showTab}
+          showCriteria={[config.candidateMemberId]}
+          setActiveTab={setActiveTab}
+          display={display}
+          updateDisplay={updateDisplay}
+          query={config.candidateMemberId}
+          icon="fas fa-gavel"
+          color="primary"
+          partyType="DEM"
+        >
+        </NavTab>
+        <NavTab
+          displayType="Propublica"
+          showTab={showTab}
+          showCriteria={[config.opponentMemberId]}
+          setActiveTab={setActiveTab}
+          display={display}
+          updateDisplay={updateDisplay}
+          query={config.opponentMemberId}
+          icon="fas fa-gavel"
+          color="danger"
+          partyType="REP"
+        >
+        </NavTab>
+
+        <NavTab
+          displayType="Finance"
+          showTab={showTab}
+          showCriteria={[
+            config.candidateFECId,
+            config.opponentFECId,
+            config.candidateCommitteeFECId,
+            config.opponentFECId,
+          ]}
+          setActiveTab={setActiveTab}
+          display={display}
+          updateDisplay={updateDisplay}
+          icon="fas fa-dollar-sign"
+          color="secondary"
+          partyType="BOTH"
+        >
+        </NavTab>
+
       </ul>
     </div>;
 };

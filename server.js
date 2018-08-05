@@ -102,9 +102,7 @@ app.get('/propublica/finance', function (req, res) {
     opponentCommitteeInfo,
   ])
   .then(function (response) {
-    // console.log(response);
     const [candidate, opponent, candidateCommittee, opponentCommittee] = response;
-    console.log(candidate.data.results[0]);
     res.send([
       candidate.data.results[0],
       opponent.data.results[0],

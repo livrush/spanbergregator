@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 const Navbar = ({
   display,
+  updateDisplay,
   queryPress,
   queryTwitter,
   queryPropublica,
@@ -22,15 +23,15 @@ const Navbar = ({
         <li className={'nav-item interactive ' + displayButton(config.candidateName)}>
           <a
             className={'nav-link text-primary border-primary border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'press-candidate')}
-            onClick={() => queryPress(config.candidateName, 'candidate')}
-          >
+            onClick={() => updateDisplay('Press', config.candidateName, config.candidateName)}
+            >
             <i className="fas fa-newspaper" />
           </a>
         </li>
         <li className={'nav-item interactive ' + displayButton(config.opponentName)}>
           <a
             className={'nav-link text-danger border-danger border-bottom-0 bg-white mr-1' + validateActiveButton(display, 'press-opponent')}
-            onClick={() => queryPress(config.opponentName, 'opponent')}
+            onClick={() => updateDisplay('Press', config.opponentName, config.opponentName)}
           >
             <i className="fas fa-newspaper" />
           </a>

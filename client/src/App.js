@@ -19,16 +19,117 @@ class App extends Component {
     };
     this.queryPress = this.queryPress.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
+    this.queryFinance = this.queryFinance.bind(this);
     this.queryTwitter = this.queryTwitter.bind(this);
+    this.updateDisplay = this.updateDisplay.bind(this);
     this.displayContent = this.displayContent.bind(this);
     this.queryPropublica = this.queryPropublica.bind(this);
-    this.queryPropublicaFinance = this.queryPropublicaFinance.bind(this);
   }
 
   componentDidMount() {
     const { query } = this.state;
-    this.queryPress(query, 'candidate');
-    // this.queryPropublicaFinance()
+    // this.queryPress(query, 'candidate');
+    // this.queryFinance();
+    this.updateDisplay('Press', config.candidateName, config.candidateName);
+  }
+
+  showLoader() {
+    this.setState({
+      display: 'loader',
+    });
+  }
+
+  updateDisplay(display, party, query) {
+    const app = this;
+    app.showLoader();
+    this['query' + display](query)
+    .then(function ({ data }) {
+      app.setState({
+        data,
+        display: `${display.toLowerCase()}-${party}`,
+      });
+    });
+  }
+
+  queryPropublica(query, type) {
+    const app = this;
+    app.showLoader();
+    const display = type ? 'propublica-' + type : 'propublica';
+    return axios({
+      method: 'get',
+      url: '/propublica',
+      params: {
+        id: query,
+      },
+    // }).then(function ({ data }) {
+    //   app.setState({
+    //     data,
+    //     display,
+    //   });
+    });
+  }
+
+  queryFinance() {
+    const app = this;
+    app.showLoader();
+    return axios({
+      method: 'get',
+      url: '/propublica/finance',
+      params: {
+        candidate: config.candidateFECId,
+        opponent: config.opponentFECId,
+        candidateCommittee: config.candidateCommitteeFECId,
+        opponentCommittee: config.opponentCommitteeFECId,
+      },
+    // }).then(function ({ data }) {
+    //   app.setState({
+    //     data,
+    //     display: 'finance',
+    //   });
+    });
+  }
+
+  queryPress(query, type) {
+    const app = this;
+    app.showLoader();
+    const display = type ? 'press-' + type : 'press';
+    app.setState({ query });
+    return axios({
+      method: 'get',
+      url: '/newsApi',
+      params: {
+        q: query,
+      },
+    // }).then(function ({ data }) {
+    //   app.setState({
+    //     data,
+    //     display,
+    //   });
+    });
+  }
+
+  queryTwitter(username, type) {
+    const app = this;
+    app.showLoader();
+    const display = type ? 'twitter-' + type : 'twitter';
+    return axios({
+      method: 'get',
+      url: '/twitter/timeline',
+      params: {
+        u: username,
+      },
+    // }).then(function ({ data }) {
+    //   app.setState({
+    //     data,
+    //     display,
+    //   });
+    });
+  }
+
+  updateQuery({ target }) {
+    this.setState({
+      [target.name]: target.value
+    });
   }
 
   displayContent(display) {
@@ -41,96 +142,9 @@ class App extends Component {
       return (<Tweets tweets={ data }></Tweets>);
     } else if (display.indexOf('press') > -1) {
       return (<Articles articles={ data }></Articles>);
-    } else if (display === 'finance') {
+    } else if (display.indexOf('finance') > -1) {
       return (<Finances data={ data }></Finances>);
     }
-  }
-
-  showLoader() {
-    this.setState({
-      display: 'loader',
-    });
-  }
-
-  queryPropublica(query, type) {
-    const app = this;
-    app.showLoader();
-    const display = type ? 'propublica-' + type : 'propublica';
-    axios({
-      method: 'get',
-      url: '/propublica',
-      params: {
-        id: query,
-      },
-    }).then(function ({ data }) {
-      app.setState({
-        data,
-        display,
-      });
-    });
-  }
-
-  queryPropublicaFinance() {
-    const app = this;
-    app.showLoader();
-    axios({
-      method: 'get',
-      url: '/propublica/finance',
-      params: {
-        candidate: config.candidateFECId,
-        opponent: config.opponentFECId,
-        candidateCommittee: config.candidateCommitteeFECId,
-        opponentCommittee: config.opponentCommitteeFECId,
-      },
-    }).then(function ({ data }) {
-      app.setState({
-        data,
-        display: 'finance',
-      });
-    });
-  }
-
-  queryPress(query, type) {
-    const app = this;
-    app.showLoader();
-    const display = type ? 'press-' + type : 'press';
-    app.setState({ query });
-    axios({
-      method: 'get',
-      url: '/newsApi',
-      params: {
-        q: query,
-      },
-    }).then(function ({ data }) {
-      app.setState({
-        data,
-        display,
-      });
-    });
-  }
-
-  queryTwitter(username, type) {
-    const app = this;
-    app.showLoader();
-    const display = type ? 'twitter-' + type : 'twitter';
-    axios({
-      method: 'get',
-      url: '/twitter/timeline',
-      params: {
-        u: username,
-      },
-    }).then(function ({ data }) {
-      app.setState({
-        data,
-        display,
-      });
-    });
-  }
-
-  updateQuery({ target }) {
-    this.setState({
-      [target.name]: target.value
-    });
   }
 
   render() {
@@ -163,10 +177,11 @@ class App extends Component {
         <main className="container">
           <Navbar
             display={this.state.display}
+            updateDisplay={this.updateDisplay}
             queryPress={this.queryPress}
+            queryFinance={this.queryFinance}
             queryTwitter={this.queryTwitter}
             queryPropublica={this.queryPropublica}
-            queryPropublicaFinance={this.queryPropublicaFinance}
         ></Navbar>
 
           <div className="content">

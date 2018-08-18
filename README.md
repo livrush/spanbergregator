@@ -93,7 +93,6 @@ TwitterConsumerKey=
 TwitterConsumerSecret=
 TwitterAccessToken=
 TwitterAccessTokenSecret=
-TwitterCallBackUrl=
 ```
 
 ### Add configs for your campaign

@@ -16,7 +16,6 @@ const {
   TwitterConsumerSecret,
   TwitterAccessToken,
   TwitterAccessTokenSecret,
-  TwitterCallBackUrl,
   PORT,
 } = process.env;
 

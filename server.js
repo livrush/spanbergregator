@@ -7,7 +7,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const axios = require('axios');
-const twitterAPI = require('node-twitter-api')
+const twitterAPI = require('node-twitter-api');
 
 const {
   PropublicaApiKey,

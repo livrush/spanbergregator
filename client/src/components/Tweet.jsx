@@ -16,28 +16,34 @@ const Tweet = ({ tweet }) => {
         return 'tweet';
     };
 
+    const tweetLinkMaker = function(username, tweetId) {
+        return tweetId ?
+            `https://www.twitter.com/${username}/status/${tweetId}` :
+            `https://www.twitter.com/${username}`;
+    };
+
     const addInteractionTag = function(tweet) {
         const { text, is_quote_status: quote, in_reply_to_screen_name: reply } = tweet;
         let action, link, name, tweetUrl;
         if (text.slice(0, 2) === 'RT' || quote || (reply && _.get(tweet, "in_reply_to_screen_name") !== tweet.user.screen_name)) {
             if (text.slice(0, 2) === 'RT') {
                 action = 'Retweeted';
-                name = text.match(/(@)\w+/)[0];
-                link = `https://www.twitter.com/${name.slice(1)}`;
-                tweetUrl = `${link}/status/${_.get(tweet, "retweeted_status.id_str")}`;
+                name = text.match(/(@)\w+/)[0].slice(1);
+                link = tweetLinkMaker(name);
+                tweetUrl = tweetLinkMaker(name, _.get(tweet, "retweeted_status.id_str"));
             } else if (quote) {
                 action = 'Quoted';
-                name = '@' + _.get(tweet, 'quoted_status.user.screen_name');
-                link = `https://www.twitter.com/${name.slice(1)}`;
-                tweetUrl = `${link}/status/${_.get(tweet, 'quoted_status.id_str')}`;
+                name = _.get(tweet, 'quoted_status.user.screen_name');
+                link = tweetLinkMaker(name);
+                tweetUrl = tweetLinkMaker(name, _.get(tweet, 'quoted_status.id_str'));
             } else if (reply && _.get(tweet, "in_reply_to_screen_name") !== tweet.user.screen_name) {
                 action = "Mentioned";
-                name = "@" + _.get(tweet, "in_reply_to_screen_name");
-                link = `https://www.twitter.com/${name.slice(1)}`;
+                name = _.get(tweet, "in_reply_to_screen_name");
+                link = tweetLinkMaker(name);
             }
 
-            if (tweetUrl) return (<p>{action} <a href={link} target="_blank">{name}</a>'s <a href={tweetUrl} target="_blank">tweet</a></p>);
-            else return (<p>{action} <a href={link} target="_blank">{name}</a></p>);
+            if (tweetUrl) return (<p>{action} <a href={link} target="_blank">{'@' + name}</a>'s <a href={tweetUrl} target="_blank">tweet</a></p>);
+            else return (<p>{action} <a href={link} target="_blank">{'@' + name}</a></p>);
         }
     }
 
@@ -67,7 +73,7 @@ const Tweet = ({ tweet }) => {
         <li className={`article list-group-item ${specifyTweetType(tweet.text, tweet.is_quote_status, tweet.in_reply_to_screen_name)}`}>
             <div className="row">
                 <div className="col-2">
-                    <a href="http://">
+                    <a href={tweet.user}>
                         <img alt="Tweet Img" src={tweet.user.profile_image_url} />
                     </a>
                     { addInteractionUser(tweet) }

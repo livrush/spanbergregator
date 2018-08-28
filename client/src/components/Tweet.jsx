@@ -53,16 +53,15 @@ const Tweet = ({ tweet }) => {
         if (text.slice(0, 2) === 'RT' || quote || (reply && _.get(tweet, "in_reply_to_screen_name") !== tweet.user.screen_name)) {
             if (text.slice(0, 2) === 'RT') {
                 user = _.get(tweet, 'retweeted_status.user', {});
-                userLink = `https://www.twitter.com/${user.screen_name}`;
+                userLink = tweetLinkMaker(user.screen_name);
                 userImg = user.profile_image_url_https;
             } else if (quote) {
                 user = _.get(tweet, "quoted_status.user", {});
-                userLink = `https://www.twitter.com/${user.screen_name}`;
+                userLink = tweetLinkMaker(user.screen_name);
                 userImg = user.profile_image_url_https;
             } else if (reply && _.get(tweet, "in_reply_to_screen_name") !== tweet.user.screen_name) {
-                // console.log(tweet);
                 user = _.get(tweet, "entities", {});
-                userLink = `https://www.twitter.com/${tweet.in_reply_to_status_id_str}`;
+                userLink = tweetLinkMaker(tweet.in_reply_to_status_id_str);
                 userImg = tweet.in_reply_to_status_id_str;
             }
             return (<a href={userLink} target="_blank"><img src={userImg} alt=""/></a>);
@@ -73,7 +72,7 @@ const Tweet = ({ tweet }) => {
         <li className={`article list-group-item ${specifyTweetType(tweet.text, tweet.is_quote_status, tweet.in_reply_to_screen_name)}`}>
             <div className="row">
                 <div className="col-2">
-                    <a href={tweet.user}>
+                    <a href={tweetLinkMaker(tweet.user.id_str, tweet.id_str)} target="_blank">
                         <img alt="Tweet Img" src={tweet.user.profile_image_url} />
                     </a>
                     { addInteractionUser(tweet) }

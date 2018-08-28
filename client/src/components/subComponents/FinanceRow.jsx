@@ -12,16 +12,17 @@ const FinanceRow = ({
         <span className={`text-${color}`}>{title}</span>:
       </div>
       <div className="col-12 col-md-6 text-right">
-        $<span className={`text-${color}`}>{sanitizeNumber(amount)}</span>
+        $<span className={`text-${color}`}>{sanitizeNumber(amount, title)}</span>
       </div>
     </div>;
 };
 
 export default FinanceRow;
 
-const sanitizeNumber = x => {
-  if (typeof x !== 'number') debugger;
-  var parts = x
+const sanitizeNumber = number => {
+  if (typeof number !== 'number') debugger;
+  if (typeof number !== 'number') return;
+  var parts = number
     .toFixed(2)
     .toString()
     .split('.');

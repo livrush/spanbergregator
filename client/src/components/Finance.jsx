@@ -161,7 +161,7 @@ class Finance extends Component {
         <FinanceRow prefix="Total" title="Individual Unitemized" amount={committeeInfo.total_individual_unitemized} color="" />
         <FinanceRow prefix="Total" title="Candidate Contributions" amount={committeeInfo.total_candidate_contributions} color="" />
         <FinanceRow prefix="" title="Independent Expenditures" amount={committeeInfo.total_independent_expenditures} color="" />
-        <FinanceRow prefix="" title="Coordinated Expenditures" amount={committeeInfo.total_coordinated_expenditures} color="" />
+        {/* <FinanceRow prefix="" title="Coordinated Expenditures" amount={committeeInfo.total_coordinated_expenditures} color="" /> */}
 
         <div className="w-100 border-bottom my-2" />
 
@@ -200,13 +200,3 @@ class Finance extends Component {
 }
 
 export default Finance;
-
-const sanitizeNumber = x => {
-  var parts = x
-    .toFixed(2)
-    .toString()
-    .split('.');
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  parts[1] = parts[1].padEnd(2, 0);
-  return parts.join('.');
-};

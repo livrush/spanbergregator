@@ -28,7 +28,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { query } = this.state;
     this.updateDisplay('Press', 'DEM', config.demName);
   }
 

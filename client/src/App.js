@@ -5,7 +5,7 @@ import config from './config'
 import Loader from './components/Loader';
 import Navbar from './components/Navbar';
 import Articles from './components/Articles';
-import YouTube from './components/YouTube';
+import YouTube from './components/YouTube.jsx';
 import Tweets from './components/Tweets';
 import VoteInfo from './components/VoteInfo';
 import Finances from './components/Finances';

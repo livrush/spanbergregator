@@ -1,16 +1,29 @@
 import React from 'react';
+import moment from 'moment';
 
 const Video = ({ video }) => (
-  <div className="row bg-light">
-    <div className="col-2">
-      <img src={video.snippet.thumbnails.default.url} alt={video.snippet.title} />
+  <div className="">
+  <div className="d-flex">
+    <div className="video-thumbnail-wrapper">
+      <img
+        className="video-thumbnail"
+        src={video.snippet.thumbnails.medium.url}
+        alt={video.snippet.title}
+      />
     </div>
-    <div className="col-10">
-      <p>{video.snippet.title}</p>
-      <p>{video.snippet.channelTitle}</p>
-      <p>{video.snippet.description}</p>
-      <p>{video.snippet.publishedAt}</p>
-    </div>
+    <p className="video-details">
+      <a
+        href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
+        target="_blank"
+      >
+        {video.snippet.title}
+      </a>
+      <br />
+      {video.snippet.channelTitle}
+      <br />
+      {moment(video.snippet.publishedAt).format('MMM Do, YYYY')}
+    </p>
+  </div>
   </div>
 );
 

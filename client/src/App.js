@@ -5,6 +5,7 @@ import config from './config'
 import Loader from './components/Loader';
 import Navbar from './components/Navbar';
 import Articles from './components/Articles';
+import YouTube from './components/YouTube';
 import Tweets from './components/Tweets';
 import VoteInfo from './components/VoteInfo';
 import Finances from './components/Finances';
@@ -21,6 +22,7 @@ class App extends Component {
     this.queryPress = this.queryPress.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
     this.queryFinance = this.queryFinance.bind(this);
+    this.queryYouTube = this.queryYouTube.bind(this);
     this.queryTwitter = this.queryTwitter.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
     this.displayContent = this.displayContent.bind(this);
@@ -83,6 +85,16 @@ class App extends Component {
     });
   }
 
+  queryYouTube(query) {
+    return axios({
+      method: 'get',
+      url: '/youtube',
+      params: {
+        q: query,
+      },
+    });
+  }
+
   queryTwitter(username) {
     return axios({
       method: 'get',
@@ -105,6 +117,8 @@ class App extends Component {
       return (<Loader></Loader>);
     } else if (display.indexOf('Propublica') > -1) {
       return (<VoteInfo votes={ data }></VoteInfo>);
+    } else if (display.indexOf('YouTube') > -1) {
+      return (<YouTube videos={ data }></YouTube>);
     } else if (display.indexOf('Twitter') > -1) {
       return (<Tweets tweets={ data }></Tweets>);
     } else if (display.indexOf('Press') > -1) {

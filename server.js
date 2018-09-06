@@ -12,6 +12,7 @@ const twitterAPI = require('node-twitter-api');
 const {
   PropublicaApiKey,
   NewsApiKey,
+  YouTubeApiKey,
   TwitterConsumerKey,
   TwitterConsumerSecret,
   TwitterAccessToken,
@@ -121,6 +122,24 @@ app.get('/newsApi', function (req, res) {
     },
   }).then(function (response) {
     res.send(response.data.articles);
+  });
+});
+
+app.get('/youtube', function (req, res) {
+  const query = req.query.q;
+  axios({
+    method: 'get',
+    url: `https://www.googleapis.com/youtube/v3/search`,
+    params: {
+      key: YouTubeApiKey,
+      q: query,
+      part: 'snippet',
+      order: 'date',
+      maxResults: 50,
+    },
+  }).then(function (response) {
+    console.log(response.data);
+    res.send(response.data.items);
   });
 });
 

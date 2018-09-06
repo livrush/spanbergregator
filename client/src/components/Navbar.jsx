@@ -1,21 +1,18 @@
-import React from "react";
+import React from 'react';
 import _ from 'lodash';
 
 import NavTab from './subComponents/NavTab';
 
-const Navbar = ({
-  config,
-  display,
-  updateDisplay,
-}) => {
-  const showTab = (args) => _.every(args) ? '' : 'd-none';
+const Navbar = ({ config, display, updateDisplay }) => {
+  const showTab = args => (_.every(args) ? '' : 'd-none');
   const setActiveTab = (display, displayInstance) => {
-    if (display === displayInstance) return " active-media";
-    return "";
+    if (display === displayInstance) return ' active-media';
+    return '';
   };
 
-  return <div className="container">
-      <ul className="nav nav-tabs border-bottom-0">
+  return (
+    <div className="container">
+      <ul className="aggregator-nav nav nav-tabs border-bottom-0">
         <NavTab
           displayType="Press"
           showTab={showTab}
@@ -27,8 +24,7 @@ const Navbar = ({
           icon="fas fa-newspaper"
           color="primary"
           partyType="DEM"
-        >
-        </NavTab>
+        />
         <NavTab
           displayType="Press"
           showTab={showTab}
@@ -40,8 +36,33 @@ const Navbar = ({
           icon="fas fa-newspaper"
           color="danger"
           partyType="REP"
-        >
-        </NavTab>
+        />
+
+        <NavTab
+          displayType="YouTube"
+          showTab={showTab}
+          showCriteria={[config.demYouTube]}
+          setActiveTab={setActiveTab}
+          display={display}
+          updateDisplay={updateDisplay}
+          query={config.demYouTube}
+          icon="fab fa-youtube"
+          color="primary"
+          partyType="DEM"
+        />
+        <NavTab
+          displayType="YouTube"
+          showTab={showTab}
+          showCriteria={[config.repYouTube]}
+          setActiveTab={setActiveTab}
+          display={display}
+          updateDisplay={updateDisplay}
+          query={config.repYouTube}
+          icon="fab fa-youtube"
+          color="danger"
+          partyType="REP"
+        />
+
         <NavTab
           displayType="Twitter"
           showTab={showTab}
@@ -53,8 +74,7 @@ const Navbar = ({
           icon="fab fa-twitter"
           color="primary"
           partyType="DEM"
-        >
-        </NavTab>
+        />
         <NavTab
           displayType="Twitter"
           showTab={showTab}
@@ -66,8 +86,7 @@ const Navbar = ({
           icon="fab fa-twitter"
           color="danger"
           partyType="REP"
-        >
-        </NavTab>
+        />
 
         <NavTab
           displayType="Propublica"
@@ -80,8 +99,7 @@ const Navbar = ({
           icon="fas fa-gavel"
           color="primary"
           partyType="DEM"
-        >
-        </NavTab>
+        />
         <NavTab
           displayType="Propublica"
           showTab={showTab}
@@ -93,8 +111,7 @@ const Navbar = ({
           icon="fas fa-gavel"
           color="danger"
           partyType="REP"
-        >
-        </NavTab>
+        />
 
         <NavTab
           displayType="Finance"
@@ -103,7 +120,7 @@ const Navbar = ({
             config.demFECId,
             config.repFECId,
             config.demCommitteeFECId,
-            config.repCommitteeFECId,
+            config.repCommitteeFECId
           ]}
           setActiveTab={setActiveTab}
           display={display}
@@ -111,11 +128,10 @@ const Navbar = ({
           icon="fas fa-dollar-sign"
           color="secondary"
           partyType="BOTH"
-        >
-        </NavTab>
-
+        />
       </ul>
-    </div>;
+    </div>
+  );
 };
 
 export default Navbar;

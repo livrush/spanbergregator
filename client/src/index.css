@@ -50,6 +50,42 @@ body {
   cursor: pointer;
 }
 
+.video-wrapper, .video-list-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+}
+
+.video-wrapper {
+  width: 75%;
+}
+
+.video-list-wrapper {
+  text-align: left;
+  font-size: 0.75em;
+  width: 25%;
+  padding-left: 10px;
+}
+
+.video-list-wrapper ul {
+  padding-left: 4px;
+}
+
+.video-wrapper iframe,
+.video-list-wrapper ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.video-thumbnail {
+  width: 100%;
+}
+
 .tweet-retweet {
   background-color: #e3f3e7;
 }
@@ -64,4 +100,34 @@ body {
 
 .tweet-reply-self {
   background-color: #eee;
+}
+
+@media (max-width: 576px) {
+  .youtube-content {
+    flex-direction: column;
+  }
+
+  .video-wrapper,
+  .video-list-wrapper {
+    width: 100%;
+  }
+
+  .video-list-wrapper ul {
+    padding-top: 4px;
+    padding-left: 0;
+  }
+
+  .video-details {
+    line-height: 1.4em;
+    margin-bottom: 10px;
+    overflow: hidden;
+    padding-left: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 70%;
+  }
+
+  .video-thumbnail-wrapper {
+    width: 30%;
+  }
 }

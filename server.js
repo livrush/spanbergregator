@@ -132,10 +132,11 @@ app.get('/youtube', function (req, res) {
     url: `https://www.googleapis.com/youtube/v3/search`,
     params: {
       key: YouTubeApiKey,
-      q: query,
-      part: 'snippet',
-      order: 'date',
       maxResults: 50,
+      order: 'date',
+      part: 'snippet',
+      q: query,
+      type: 'video',
     },
   }).then(function (response) {
     console.log(response.data);

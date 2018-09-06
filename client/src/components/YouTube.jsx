@@ -11,11 +11,6 @@ class YouTube extends Component {
     this.handleVideoListClick = this.handleVideoListClick.bind(this);
   }
 
-  componentDidMount() {
-    const { videos } = this.props;
-    this.setState({ selectedId: videos[0].id.videoId });
-  }
-
   handleVideoListClick(selectedId) {
     this.setState({ selectedId });
   }
@@ -33,7 +28,7 @@ class YouTube extends Component {
         <div className="youtube-content d-flex">
           <div className="video-wrapper">
             <iframe
-              src={`https://www.youtube.com/embed/${this.state.selectedId}`}
+              src={`https://www.youtube.com/embed/${this.state.selectedId || videos[0].id.videoId}`}
               frameBorder="0"
               allow="autoplay; encrypted-media"
               allowFullScreen

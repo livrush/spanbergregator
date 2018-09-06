@@ -1,30 +1,51 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Video from './Video';
 import uuid from 'uuid/v1';
 
-const YouTube = ({ videos }) => {
-  const generateList = function(videos) {
-    console.log(videos);
-    return videos.map(video => <Video key={uuid()} video={video} />);
-  };
+class YouTube extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedId: null,
+    };
+    this.handleVideoListClick = this.handleVideoListClick.bind(this);
+  }
 
-  return (
-    <div className="card p-4">
-      <div className="youtube-content d-flex">
-        <div className="video-wrapper">
-          <iframe
-            src={`https://www.youtube.com/embed/${videos[0].id.videoId || videos[0].id.videoId}`}
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-          />
-        </div>
-        <div className="video-list-wrapper">
-          <ul className="list-group border-top-0">{generateList(videos)}</ul>
+  componentDidMount() {
+    const { videos } = this.props;
+    this.setState({ selectedId: videos[0].id.videoId });
+  }
+
+  handleVideoListClick(selectedId) {
+    this.setState({ selectedId });
+  }
+
+  render() {
+    const { videos } = this.props;
+    const { handleVideoListClick } = this;
+
+    const generateList = function(videos) {
+      return videos.map(video => <Video key={uuid()} video={video} click={handleVideoListClick} />);
+    };
+
+    return (
+      <div className="card p-4">
+        <div className="youtube-content d-flex">
+          <div className="video-wrapper">
+            <iframe
+              src={`https://www.youtube.com/embed/${this.state.selectedId}`}
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            />
+          </div>
+          <div className="video-list-wrapper">
+            <ul className="list-group border-top-0">{generateList(videos)}</ul>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
+}
 
 export default YouTube;

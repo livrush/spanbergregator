@@ -72,6 +72,11 @@ body {
   padding-left: 4px;
 }
 
+.video-list-item {
+  cursor: pointer;
+  flex-direction: column;
+}
+
 .video-wrapper iframe,
 .video-list-wrapper ul {
   position: absolute;
@@ -105,6 +110,10 @@ body {
 @media (max-width: 576px) {
   .youtube-content {
     flex-direction: column;
+  }
+
+  .video-list-item {
+    flex-direction: row;
   }
 
   .video-wrapper,

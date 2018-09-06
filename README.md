@@ -69,9 +69,10 @@ cd ..
 1. Make a .env file in the `root` directory
     * `/.env`
 1. You will need to get API keys for several services
-    * [Twitter](https://developer.twitter.com/en/docs.html)
-    * [NewsApi](https://newsapi.org/register)
     * [Propublica](https://www.propublica.org/datastore/api/propublica-congress-api)
+    * [NewsApi](https://newsapi.org/register)
+    * [Twitter](https://developer.twitter.com/en/docs.html)
+    * [YouTube](https://developers.google.com/youtube/v3/getting-started)
 1. Should contain the following:
 
 ```
@@ -86,6 +87,10 @@ PropublicaApiKey=
 # NewsApi API
 
 NewsApiKey=
+
+# YouTubeApi API
+
+YouTubeApiKey=
 
 # Twitter API
 
@@ -106,11 +111,13 @@ Store in:
 ```javascript
 export default {
   demName: '',
+  demYouTube: '',
   demTwitter: '',
   demMemberId: '',
   demFECId: '',
   demCommitteeFECId: '',
   repName: '',
+  repYouTube: '',
   repTwitter: '',
   repMemberId: '',
   repFECId: '',

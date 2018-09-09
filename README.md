@@ -29,6 +29,7 @@ What it does:
 
 * Collects and displays news articles from **NewsApi** about candidate and opponent
 * Collects and displays news articles from **NewsApi** about user input query
+* Collects and displays most recent videos from **YouTube**
 * Collects and displays tweets from each candidate's **Twitter** account
   * Highlights retweets in green
   * Highlights quote replies in yellow
@@ -46,11 +47,10 @@ What it does:
 
 ## Usage
 
-### Clone this repo
+### Clone this repository
 
 ```
-git clone git@gitlab.com:digidems/spanbergregator.git
-cd spanbergregator
+git clone git@gitlab.com:digidems/spanbergregator.git && cd spanbergregator
 ```
 
 ### Install dependencies
@@ -59,9 +59,6 @@ For development purposes this project uses a proxy server, so there are two dire
 
 ```
 npm i
-cd client
-npm i
-cd ..
 ```
 
 ### Add environmental variables

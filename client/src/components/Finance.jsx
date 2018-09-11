@@ -19,12 +19,12 @@ class Finance extends Component {
           ['Contributions', committeeInfo.total_contributions],
           ['Individuals', committeeInfo.total_from_individuals],
           ['PACs', committeeInfo.total_from_pacs],
+          ['Disbursements', committeeInfo.total_disbursements]
           [
-            'Disbursements',
+            'Available',
             committeeInfo.total_contributions -
               committeeInfo.total_disbursements
           ],
-          ['Available', committeeInfo.total_disbursements]
         ],
         colors: {
           Contributions: '#28a745',

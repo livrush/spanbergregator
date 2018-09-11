@@ -2,6 +2,7 @@
   "name": "spanberger-aggregator",
   "version": "0.1.0",
   "scripts": {
+    "deploy": "git push heroku master",
     "clean": "concurrently \"rimraf node_modules\" \"cd client && rimraf node_modules build\"",
     "postinstall": "npm --prefix ./client install",
     "heroku-postbuild": "npm run build",

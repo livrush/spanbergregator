@@ -2,6 +2,8 @@
 
 ![Screenshot](./assets/preview.png)
 
+Created/maintained by [Liv](https://gitlab.com/livrush)
+
 * [About](#about)
 * [Techstack](#techstack)
 * [Usage](#usage)

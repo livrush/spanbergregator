@@ -97,6 +97,24 @@ TwitterAccessToken=
 TwitterAccessTokenSecret=
 ```
 
+**Tip:**
+
+All you need to do to get your Twitter credentials are:
+
+1. [Create a **Twitter developer account**](https://developer.twitter.com/)
+1. [Create an **app**](https://developer.twitter.com/en/apps/create)
+1. Generate an access **token**
+1. Take your **consumer key**, **access token**, and their respective **secrets**
+
+**Tip:**
+
+To get the YouTube API key you will need to:
+
+1. [Create a **Google developer account**](https://console.developers.google.com/)
+1. [Create a **project**](https://console.developers.google.com/projectcreate)
+1. Enable **YouTube Data API v3**
+1. Get your **API key**
+
 ### Add configs for your campaign
 
 These terms will be used to search the various APIs used in this app.
@@ -121,6 +139,18 @@ export default {
   repCommitteeFECId: '',
 };
 ```
+
+**TIP:**
+
+If your candidate, or opponent, has a common-sounding name you may need to manipulate the `demName`/`repYouTube` settings.
+
+These two config variables will be used to search through NewsApi and YouTube, meaning common names/words may bring undesired content.
+
+Clarifying options include:
+* Congress
+* Senate
+* The candidate's district
+* The candidate's state
 
 #### What is the member ID?
 
@@ -182,7 +212,7 @@ The `.env` file we created earlier is great for use locally. Once we decide to d
 
 You can even change the name of your app here, if you like.
 
-![Setting Heroku preferencecs](./assets/heroku-env-vars.png)
+![Setting Heroku preferences](./assets/heroku-env-vars.png)
 
 ### Push up changes
 

@@ -192,6 +192,12 @@ Finally, you just have to push up your code to Heroku. Creating an app will have
 git push heroku master
 ```
 
+OR you can use this `npm` script
+
+```
+npm run deploy
+```
+
 The build process is already set up, so once the build finishes you should have a live aggregator!
 
 ## Contribute

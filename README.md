@@ -99,7 +99,7 @@ TwitterAccessTokenSecret=
 
 **Tip:**
 
-All you need to do to get your Twitter credentials are:
+To get your Twitter credentials you will need to:
 
 1. [Create a **Twitter developer account**](https://developer.twitter.com/)
 1. [Create an **app**](https://developer.twitter.com/en/apps/create)

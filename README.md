@@ -2,7 +2,7 @@
 
 ![Screenshot](./assets/preview.png)
 
-Created/maintained by [Liv](https://gitlab.com/livrush)
+Created/maintained by [Liv](https://github.com/livrush)
 
 * [About](#about)
 * [Techstack](#techstack)
@@ -52,7 +52,7 @@ What it does:
 ### Clone this repository
 
 ```
-git clone git@gitlab.com:digidems/spanbergregator.git && cd spanbergregator
+git clone git@github.com:livrush/spanbergregator.git && cd spanbergregator
 ```
 
 ### Install dependencies
